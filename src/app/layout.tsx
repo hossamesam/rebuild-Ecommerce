@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-
+import Header from "./commbonades/header";
+import Popover from "./commbonades/Popover";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -15,8 +16,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="ar" dir="rtl">
+      <body className={inter.className}>
+        <Header />
+        <Popover />
+        {children}
+      </body>
     </html>
   );
 }
