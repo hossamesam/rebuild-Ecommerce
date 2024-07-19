@@ -30,19 +30,19 @@ function Popover() {
 
       <nav className={open + ' ease-out bg-neutral-100 absolute   grid-cols-4 p-4 items-center gap-8 '}>
         <a href="/" className='relative  h-full w-full  object-cover rounded-lg' >
-          <Image className='h-full w-full  object-cover object-top rounded-lg ' src={man_catogrey} />
+          <Image className="h-full w-full  object-cover object-top rounded-lg " src={man_catogrey} alt={'man_catogrey'} />
           <div className="absolute flex w-full h-1/5 bottom-0 items-center justify-center text-white bg-black font-sans font-bold">ملابس رجال</div>
         </a>
         <a href="/" className='relative h-full w-full  object-cover rounded-lg' >
-          <Image className='h-full w-full  object-cover object-top rounded-lg ' src={women_catogrey} />
+          <Image className='h-full w-full  object-cover object-top rounded-lg ' src={women_catogrey}  alt={'women_catogrey'}  />
           <div className='absolute flex w-full  h-1/5 items-center bottom-0 justify-center text-white bg-black font-sans font-bold'>ملابس سيدات</div>
         </a>
         <a href="/" className='relative h-full w-full  object-cover rounded-lg' >
-          <Image className='h-full w-full  object-cover object-top rounded-lg ' src={baby_catogrey} />
+          <Image className='h-full w-full  object-cover object-top rounded-lg ' src={baby_catogrey}  alt={'baby_catogrey'}  />
           <div className='absolute flex w-full h-1/5 items-center bottom-0 justify-center text-white bg-black font-sans font-bold'>ملابس أطفال</div>
         </a>
         <a href="/" className='relative h-full w-full  object-cover rounded-lg' >
-          <Image className='h-full w-full  object-cover object-top rounded-lg ' src={shoes_catogrey} />
+          <Image className='h-full w-full  object-cover object-top rounded-lg ' src={shoes_catogrey}  alt={'shoes_catogrey'}  />
           <div className='absolute flex w-full h-1/5 items-center bottom-0 justify-center text-white bg-black font-sans font-bold'>احذية</div>
         </a>
 

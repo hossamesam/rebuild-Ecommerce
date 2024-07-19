@@ -77,7 +77,7 @@ export default function Header() {
 
       <div className={state_menu + ' bg-gray-900/45 lg:hidden absolute h-full w-full  top-0 z-20 '}>
 
-        <button type='submit' onClick={close_menu} className='h-full w-3/4' />
+        <button title='' type='submit' onClick={close_menu} className='h-full w-3/4' />
 
         <div className='bg-slate-50 text-black absolute h-full w-56 right-0 border-2 '>
 
