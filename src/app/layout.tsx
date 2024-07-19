@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "./commbonades/header";
-import Popover from "./commbonades/Popover";
+import Header from "./(components)/header";
+import Popover from "./(components)/Popover";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
