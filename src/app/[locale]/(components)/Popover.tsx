@@ -1,10 +1,10 @@
 "use client"
 import React, { useState } from 'react'
 import { CircleChevronRight } from 'lucide-react';
-import baby_catogrey from '../../public/image_catogrey/baby.jpg';
-import man_catogrey from '../../public/image_catogrey/man_catogrey.jpg';
-import shoes_catogrey from '../../public/image_catogrey/shoes_catogrey.jpg';
-import women_catogrey from '../../public/image_catogrey/women_catogrey.jpg';
+import baby_catogrey from '@/../public/image_catogrey/baby.jpg';
+import man_catogrey from '@/../public/image_catogrey/man_catogrey.jpg';
+import shoes_catogrey from '@/../public/image_catogrey/shoes_catogrey.jpg';
+import women_catogrey from '@/../public/image_catogrey/women_catogrey.jpg';
 
 import Image from 'next/image';
 

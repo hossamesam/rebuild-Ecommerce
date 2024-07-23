@@ -1,24 +1,8 @@
-import Header from '@/(components)/header';
-import {NextIntlClientProvider} from 'next-intl';
-import {getMessages} from 'next-intl/server';
-import '../globals.css'
 
-export default async function LocaleLayout({
+export default function RootLayout({
   children,
-  params: {locale}
-}: {
+}: Readonly<{
   children: React.ReactNode;
-  params: {locale: string};
-}) {
-
- 
-  return (
-    <html lang={locale}>
-      <body>
-          <Header/>
-          {children}
-
-      </body>
-    </html>
-  );
+}>) {
+  return children;
 }

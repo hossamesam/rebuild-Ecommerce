@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { AlignJustify, X, CircleUserRound, ShoppingCart } from 'lucide-react';
 import womanIcon from "../../public/icon-drower/womanIcon.svg";
 
-export default function Header() {
+export default function Header(props:{signIn:string,xx:string}) {
   const [state_menu, setstate_menu] = useState("hidden");
   const close_menu = () => {
     state_menu === "hidden" ? setstate_menu("flex ") : setstate_menu("hidden")
@@ -46,7 +46,7 @@ export default function Header() {
             <svg width="28" height="28" viewBox="0 0 27 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M13.2918 3C15.1194 3 16.6147 4.35 16.6147 6C16.6147 7.65 15.1194 9 13.2918 9C11.4642 9 9.96884 7.65 9.96884 6C9.96884 4.35 11.4642 3 13.2918 3ZM13.2918 18C17.7778 18 22.9283 19.935 23.2606 21H3.32295C3.70508 19.92 8.82242 18 13.2918 18ZM13.2918 0C9.61993 0 6.64589 2.685 6.64589 6C6.64589 9.315 9.61993 12 13.2918 12C16.9636 12 19.9377 9.315 19.9377 6C19.9377 2.685 16.9636 0 13.2918 0ZM13.2918 15C8.85565 15 0 17.01 0 21V24H26.5836V21C26.5836 17.01 17.7279 15 13.2918 15Z" fill="#F8F8F8" />
             </svg>
-            <div className="text-2xl max-sm:hidden sm:whitespace-nowrap  sm:text-[20px] font-bold text-white font-['Roboto'] ">تسجيل الدخول</div>
+            <div className="text-2xl max-sm:hidden sm:whitespace-nowrap  sm:text-[20px] font-bold text-white font-['Roboto'] ">{props.signIn}{props.xx}</div>
           </button>
 
           <button className='flex  items-center justify-center flex-row gap-2 max-sm:h-10 max-sm:w-10 max-sm:bg-slate-500 max-sm:rounded-full max-sm:hover:bg-slate-600 ' >

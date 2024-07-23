@@ -1,11 +1,5 @@
-import Header from '@/(components)/header';
-import {useTranslations} from 'next-intl';
-export default function HomePage() {
-  return (
-  <>
-            <Header/>
+import { redirect } from 'next/navigation';
 
-  <h1>kkkkkkkk</h1>
-  </>
-)
+export default function RootPage() {
+  redirect('/en');
 }
