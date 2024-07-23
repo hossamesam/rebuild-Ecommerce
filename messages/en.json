@@ -9,8 +9,15 @@
   },
   "Navigation": {
     "home": "hdomi",
-    "signIn":"sign in",
-    "ShoppingCar":"Shopping car"
+    "menu":"menu",
+    "signIn": "sign in",
+    "ShoppingCar": "Shopping car"
+  },
+  "catogry": {
+    "Mens": "Men's Clothing",
+    "womens": "women's Clothing",
+    "babys": "baby's Clothing",
+    "shoes": "shoes"
   },
   "Footer": {
     "copyright": "© 2024 Your App. All rights reserved."

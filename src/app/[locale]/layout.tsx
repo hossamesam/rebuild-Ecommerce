@@ -23,12 +23,26 @@ export default function RootLayout({
   params: { locale },
 }: Readonly<RootLayoutProps>) {
   const t = useTranslations('Navigation');
-
+  const c = useTranslations('catogry');
+  const [Mens, womens] = [String(c('Mens')), String(c('womens'))]
   return (
     <html lang={locale} dir='rtl'>
       <body className={inter.className} >
-        <Header signIn={t('signIn')} xx="wwwwwwww" />
-        <Popover/>
+        <Header
+          signIn={t('signIn')}
+          ShoppingCar={t('ShoppingCar')}
+          mens={String(c('Mens'))}
+          women={String(c('womens'))}
+          baby={String(c('Mens'))}
+          shoes={String(c('shoes'))}
+        />
+        <Popover
+          menu={String(t('menu'))}
+          mens={String(c('Mens'))}
+          women={String(c('womens'))}
+          baby={String(c('Mens'))}
+          shoes={String(c('shoes'))}
+        />
         {children}
       </body>
     </html>

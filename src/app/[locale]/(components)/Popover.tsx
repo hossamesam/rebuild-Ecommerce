@@ -5,12 +5,11 @@ import baby_catogrey from '@/../public/image_catogrey/baby.jpg';
 import man_catogrey from '@/../public/image_catogrey/man_catogrey.jpg';
 import shoes_catogrey from '@/../public/image_catogrey/shoes_catogrey.jpg';
 import women_catogrey from '@/../public/image_catogrey/women_catogrey.jpg';
-
 import Image from 'next/image';
+import type {nav} from '../(components)/header'
 
 
-
-function Popover() {
+function Popover(props:nav) {
   const [open, setopen] = useState("hidden");
   const [rot, setrot] = useState("rotate-0");
   const openPop = () => {
@@ -21,7 +20,7 @@ function Popover() {
   return (
     <div>
       <button onClick={openPop} className=' flex justify-center items-center gap-2 w-full h-12 bg-gray-500'>
-        <span className=' font-sans font-bold text-2xl text-white '>القائمة</span>
+        <span className=' font-sans font-bold text-2xl text-white '>{props.menu}</span>
         <CircleChevronRight className={rot + ' text-white size-8'} strokeWidth={3} />
       </button>
 
@@ -31,19 +30,19 @@ function Popover() {
       <nav className={open + ' ease-out bg-neutral-100 absolute   grid-cols-4 p-4 items-center max-sm:gap-2  gap-4 '}>
         <a href="/" className='relative  h-full w-full  object-cover rounded-lg' >
           <Image className="h-full w-full  object-cover object-top rounded-lg " src={man_catogrey} alt={'man_catogrey'} />
-          <div className="absolute max-sm:text-xs   flex w-full h-1/5 bottom-0 items-center justify-center text-white bg-black font-sans font-bold">ملابس رجال</div>
+          <div className="absolute max-sm:text-xs   flex w-full h-1/5 bottom-0 items-center justify-center text-white bg-black font-sans font-bold">{props.mens}</div>
         </a>
         <a href="/" className='relative h-full w-full  object-cover rounded-lg' >
           <Image className='h-full w-full  object-cover object-top rounded-lg ' src={women_catogrey} alt={'women_catogrey'} />
-          <div className='absolute max-sm:text-xs flex w-full  h-1/5 items-center bottom-0 justify-center text-white bg-black font-sans font-bold'>ملابس سيدات</div>
+          <div className='absolute max-sm:text-xs flex w-full  h-1/5 items-center bottom-0 justify-center text-white bg-black font-sans font-bold'>{props.women}</div>
         </a>
         <a href="/" className='relative h-full w-full  object-cover rounded-lg' >
           <Image className='h-full w-full  object-cover object-top rounded-lg ' src={baby_catogrey} alt={'baby_catogrey'} />
-          <div className='absolute max-sm:text-xs flex w-full h-1/5 items-center bottom-0 justify-center text-white bg-black font-sans font-bold'>ملابس أطفال</div>
+          <div className='absolute max-sm:text-xs flex w-full h-1/5 items-center bottom-0 justify-center text-white bg-black font-sans font-bold'>{props.baby}</div>
         </a>
         <a href="/" className='relative h-full w-full  object-cover rounded-lg' >
           <Image className='h-full w-full  object-cover object-top rounded-lg ' src={shoes_catogrey} alt={'shoes_catogrey'} />
-          <div className='absolute max-sm:text-xs flex w-full h-1/5 items-center bottom-0 justify-center text-white bg-black font-sans font-bold'>احذية</div>
+          <div className='absolute max-sm:text-xs flex w-full h-1/5 items-center bottom-0 justify-center text-white bg-black font-sans font-bold'>{props.shoes}</div>
         </a>
 
 
