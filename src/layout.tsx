@@ -1,7 +1,7 @@
 import Header from '@/(components)/header';
 import {NextIntlClientProvider} from 'next-intl';
 import {getMessages} from 'next-intl/server';
-import '../globals.css'
+import './globals.css'
 
 export default async function LocaleLayout({
   children,

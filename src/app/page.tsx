@@ -1,9 +1,11 @@
-import Image from "next/image";
-
-export default function Home() {
+import Header from '@/(components)/header';
+import {useTranslations} from 'next-intl';
+export default function HomePage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      hhhhhhhhhhhhhhh
-    </main>
-  );
+  <>
+            <Header/>
+
+  <h1>kkkkkkkk</h1>
+  </>
+)
 }
