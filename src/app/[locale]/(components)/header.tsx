@@ -5,16 +5,18 @@ import logoA from "@/../public/logoWhite.png";
 import Image from 'next/image';
 import { AlignJustify, X, CircleUserRound, ShoppingCart } from 'lucide-react';
 import womanIcon from "../../public/icon-drower/womanIcon.svg";
+import Link from 'next/link';
+import i18n from '@/i18n';
 
 export interface nav {
-  menu:string,
+  menu: string,
   home: string,
   signIn: string,
   ShoppingCar: string,
-  mens:string,
-  women:string,
-  baby:string,
-  shoes:string,
+  mens: string,
+  women: string,
+  baby: string,
+  shoes: string,
 }
 
 
@@ -31,6 +33,7 @@ export default function Header(props: nav) {
       <header className="h-24 max-sm:h-12 bg-neutral-950 flex flex-row items-center justify-between dark:bg-red-500">
         <nav id='logo'>
           <a href="/" className='w-48 '>
+
             <Image className='max-sm:w-24 max-sm:h-12 w-full  h-24  object-fill flex   ' src={logo} alt='logo' />
           </a>
         </nav>
@@ -53,16 +56,30 @@ export default function Header(props: nav) {
 
 
 
-        <nav id='log-in_And_buy' className=' flex flex-row items-center justify-center   gap-2 ml-4 mt-2'>
+        <nav id='log-in_And_buy' className=' flex flex-row items-center justify-center   ml-4 mt-2 gap-2'>
 
-          <button type='submit' className='flex items-center justify-center flex-row gap-2 max-sm:h-10 max-sm:w-10 max-sm:bg-slate-500 max-sm:rounded-full max-sm:hover:bg-slate-600   '>
+
+          <button type='submit' className='flex items-center justify-center flex-row  max-sm:h-10 max-sm:w-10 max-sm:bg-slate-500 max-sm:rounded-full max-sm:hover:bg-slate-600 hover:scale-105 hover:border-[1px] rounded p-1 '>
+            <a href={location.pathname == "/ar" ? "/en" : "/ar"} className='flex gap-1'>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="22px" height="22px" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z" />
+              </svg>
+              <button type='button' className="text-md  max-sm:hidden sm:whitespace-nowrap  sm:text-[12px] font-bold text-white ">
+                En|Ar
+              </button>
+            </a>
+          </button>
+
+
+
+          <button type='submit' className='flex items-center justify-center flex-row gap-2 max-sm:h-10 max-sm:w-10 max-sm:bg-slate-500 max-sm:rounded-full max-sm:hover:bg-slate-600 hover:scale-105 hover:border-[1px] rounded p-1 '>
             <svg width="28" height="28" viewBox="0 0 27 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M13.2918 3C15.1194 3 16.6147 4.35 16.6147 6C16.6147 7.65 15.1194 9 13.2918 9C11.4642 9 9.96884 7.65 9.96884 6C9.96884 4.35 11.4642 3 13.2918 3ZM13.2918 18C17.7778 18 22.9283 19.935 23.2606 21H3.32295C3.70508 19.92 8.82242 18 13.2918 18ZM13.2918 0C9.61993 0 6.64589 2.685 6.64589 6C6.64589 9.315 9.61993 12 13.2918 12C16.9636 12 19.9377 9.315 19.9377 6C19.9377 2.685 16.9636 0 13.2918 0ZM13.2918 15C8.85565 15 0 17.01 0 21V24H26.5836V21C26.5836 17.01 17.7279 15 13.2918 15Z" fill="#F8F8F8" />
             </svg>
             <div className="text-2xl max-sm:hidden sm:whitespace-nowrap  sm:text-[20px] font-bold text-white font-['Roboto'] ">{props.signIn}</div>
           </button>
 
-          <button className='flex  items-center justify-center flex-row gap-2 max-sm:h-10 max-sm:w-10 max-sm:bg-slate-500 max-sm:rounded-full max-sm:hover:bg-slate-600 ' >
+
+          <button className='flex  items-center justify-center flex-row gap-2 max-sm:h-10 max-sm:w-10 max-sm:bg-slate-500 max-sm:rounded-full max-sm:hover:bg-slate-600 hover:scale-105 hover:border-[1px] rounded p-1' >
             <svg width="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" >
               <mask id="path-1-inside-1_5_3" fill="white">
                 <path d="M11.9403 9.14286H14.3284V5.71429H17.9104V3.42857H14.3284V0H11.9403V3.42857H8.35821V5.71429H11.9403M7.16418 19.4286C5.85075 19.4286 4.77612 20.4571 4.77612 21.7143C4.77612 22.9714 5.85075 24 7.16418 24C8.47761 24 9.55224 22.9714 9.55224 21.7143C9.55224 20.4571 8.47761 19.4286 7.16418 19.4286ZM19.1045 19.4286C17.791 19.4286 16.7164 20.4571 16.7164 21.7143C16.7164 22.9714 17.791 24 19.1045 24C20.4179 24 21.4925 22.9714 21.4925 21.7143C21.4925 20.4571 20.4179 19.4286 19.1045 19.4286ZM7.40298 15.7714V15.6571L8.47761 13.7143H17.3134C18.1493 13.7143 18.9851 13.2571 19.3433 12.5714L24 4.57143L21.9701 3.42857L17.3134 11.4286H8.95522L3.9403 1.14286H0V3.42857H2.38806L6.68657 12.1143L5.01493 14.8571C4.89552 15.2 4.77612 15.5429 4.77612 16C4.77612 17.2571 5.85075 18.2857 7.16418 18.2857H21.4925V16H7.64179C7.52239 16 7.40298 15.8857 7.40298 15.7714Z" />
@@ -78,7 +95,7 @@ export default function Header(props: nav) {
               type="button"
               onClick={close_menu}
               className=" flex items-center justify-center rounded-md p-2.5 text-gray-700
-            max-sm:bg-slate-500 max-sm:rounded-full max-sm:hover:bg-slate-600
+            max-sm:bg-slate-500 max-sm:rounded-full max-sm:hover:bg-slate-600  hover:scale-105 hover:border-[1px]
             "
             >
               <span className="sr-only">Open main menu</span>
@@ -141,6 +158,7 @@ export default function Header(props: nav) {
           <div className='absolute right-[310px]  rounded-l-full w-16 h-14 bg-slate-50  flex justify-center items-center '>
             <button onClick={close_menu} type='submit' title='escap'>
               <X />
+              <span className="sr-only">escap main menu</span>
             </button>
           </div>
 
@@ -148,7 +166,7 @@ export default function Header(props: nav) {
       </header>
 
 
-      <div className='sm:hidden w-full flex bg-neutral-950 justify-center items-center p-3'>
+      <div className='sm:hidden w-full flex bg-neutral-950 justify-center items-center p-3 '>
 
 
         <div id='search-phon' className="   grow relative  text-gray-600">

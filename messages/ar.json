@@ -1,4 +1,7 @@
 {
+  "language":{
+    "language":"ar"
+  },
   "IndexPage": {
     "title": "contoh next-intl",
     "description": "arabic"
@@ -9,9 +12,9 @@
   },
   "Navigation": {
     "home": "hdomi",
-    "menu":"القائمة",
-    "signIn":"تسجيل الدخول",
-    "ShoppingCar":"سلة التسوق"
+    "menu": "القائمة",
+    "signIn": "تسجيل الدخول",
+    "ShoppingCar": "سلة التسوق"
   },
   "catogry": {
     "Mens": "ملابس رجال",
@@ -21,5 +24,19 @@
   },
   "Footer": {
     "copyright": "© 2024 Aplikasi Anda. Hak cipta dilindungi."
+  },
+  "createpage": {
+    "dir":"rtl",
+    "ProductType": "نوع المنتج",
+    "ProductDetails": "تفاصيل المنتج",
+    "nameAr": "اسم المنتج (بالعربي)",
+    "nameEn": "اسم المنتج (بالانجليزية)",
+    "barcode": "باركود",
+    "price": "السعر",
+    "descriptionAr": "وصف المنتج (بالعربي)",
+    "descriptionEn": "وصف المنتج (بالانجليزية)",
+    "sizes": "الاحجام المتوفرة",
+    "cloros": "الالوان المتوفره",
+    "files": "files"
   }
 }

@@ -40,7 +40,7 @@ export default function RootLayout({
           menu={String(t('menu'))}
           mens={String(c('Mens'))}
           women={String(c('womens'))}
-          baby={String(c('Mens'))}
+          baby={String(c('babys'))}
           shoes={String(c('shoes'))}
         />
         {children}
