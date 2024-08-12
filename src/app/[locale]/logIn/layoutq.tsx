@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import './globals.css';
+import '../globals.css';
 import Header from '@/app/[locale]/(components)/header';
-import Popover from './(components)/Popover';
 import { useTranslations } from 'next-intl';
-import Usebanner from './(components)/slide/usebanner';
+import Login from './page';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -35,18 +34,8 @@ export default function RootLayout({
           mens={String(c('Mens'))}
           women={String(c('womens'))}
           baby={String(c('Mens'))}
-          shoes={String(c('shoes'))}
-          local={locale}
-        />
-        <Popover
-          menu={String(t('menu'))}
-          mens={String(c('Mens'))}
-          women={String(c('womens'))}
-          baby={String(c('babys'))}
-          shoes={String(c('shoes'))}
-        />
-        <Usebanner/>
-        {children}
+          shoes={String(c('shoes'))} menu={''} home={''} />
+        <Login />
       </body>
     </html>
   );

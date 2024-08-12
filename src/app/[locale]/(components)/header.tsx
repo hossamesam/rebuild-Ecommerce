@@ -1,12 +1,17 @@
 "use client"
-import React, { useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import logo from "@/../public/logoE.png";
 import logoA from "@/../public/logoWhite.png";
 import Image from 'next/image';
 import { AlignJustify, X, CircleUserRound, ShoppingCart } from 'lucide-react';
 import womanIcon from "../../public/icon-drower/womanIcon.svg";
-import Link from 'next/link';
 import i18n from '@/i18n';
+import Loginui from './Loginui';
+import createMiddleware from 'next-intl/middleware';
+import router from 'next/router';
+import { Link } from '@/navigation';
+import { useLocale, useNow, useTranslations } from 'next-intl';
+import { usePathname, useRouter } from 'next/navigation';
 
 export interface nav {
   menu: string,
@@ -17,15 +22,26 @@ export interface nav {
   women: string,
   baby: string,
   shoes: string,
+  local: string,
 }
 
 
-export default function Header(props: nav) {
 
+export default function Header(props: nav) {
   const [state_menu, setstate_menu] = useState("hidden");
+
   const close_menu = () => {
     state_menu === "hidden" ? setstate_menu("flex ") : setstate_menu("hidden")
   }
+  console.log("local: " + props.local);
+
+
+  const pathname = usePathname();
+  const router = useRouter();
+  const path = pathname.split("/").slice(2).join("/");
+  router.push(`/${props.local}/${path}`);
+  console.log("path :" + pathname.split("/").slice(2));
+
 
 
   return (
@@ -60,23 +76,20 @@ export default function Header(props: nav) {
 
 
           <button type='submit' className='flex items-center justify-center flex-row  max-sm:h-10 max-sm:w-10 max-sm:bg-slate-500 max-sm:rounded-full max-sm:hover:bg-slate-600 hover:scale-105 hover:border-[1px] rounded p-1 '>
-            <a href={location.pathname == "/ar" ? "/en" : "/ar"} className='flex gap-1'>
+            {/* <a href={location.pathname == "/ar" ? "/en" : "/ar"} className='flex gap-1'> */}
+            <Link locale={props.local === "ar" ? "en" : "ar"} href={`/${path}`}
+              className='flex gap-1'
+            >
               <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="22px" height="22px" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z" />
               </svg>
               <button type='button' className="text-md  max-sm:hidden sm:whitespace-nowrap  sm:text-[12px] font-bold text-white ">
                 En|Ar
               </button>
-            </a>
+            </Link>
           </button>
 
 
-
-          <button type='submit' className='flex items-center justify-center flex-row gap-2 max-sm:h-10 max-sm:w-10 max-sm:bg-slate-500 max-sm:rounded-full max-sm:hover:bg-slate-600 hover:scale-105 hover:border-[1px] rounded p-1 '>
-            <svg width="28" height="28" viewBox="0 0 27 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M13.2918 3C15.1194 3 16.6147 4.35 16.6147 6C16.6147 7.65 15.1194 9 13.2918 9C11.4642 9 9.96884 7.65 9.96884 6C9.96884 4.35 11.4642 3 13.2918 3ZM13.2918 18C17.7778 18 22.9283 19.935 23.2606 21H3.32295C3.70508 19.92 8.82242 18 13.2918 18ZM13.2918 0C9.61993 0 6.64589 2.685 6.64589 6C6.64589 9.315 9.61993 12 13.2918 12C16.9636 12 19.9377 9.315 19.9377 6C19.9377 2.685 16.9636 0 13.2918 0ZM13.2918 15C8.85565 15 0 17.01 0 21V24H26.5836V21C26.5836 17.01 17.7279 15 13.2918 15Z" fill="#F8F8F8" />
-            </svg>
-            <div className="text-2xl max-sm:hidden sm:whitespace-nowrap  sm:text-[20px] font-bold text-white font-['Roboto'] ">{props.signIn}</div>
-          </button>
+          <Loginui signIn={props.signIn}></Loginui>
 
 
           <button className='flex  items-center justify-center flex-row gap-2 max-sm:h-10 max-sm:w-10 max-sm:bg-slate-500 max-sm:rounded-full max-sm:hover:bg-slate-600 hover:scale-105 hover:border-[1px] rounded p-1' >

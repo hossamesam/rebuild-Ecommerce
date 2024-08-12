@@ -1,3 +1,5 @@
+import { Pathnames } from "next-intl/routing";
+
 export const locales = ['en', 'ar'] as const;
  
 // The `pathnames` object holds pairs of internal and

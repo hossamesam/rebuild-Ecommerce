@@ -38,5 +38,18 @@
     "sizes": "sizes",
     "cloros": "colors",
     "files": "files"
+  },
+  "SignUp":{
+    "dir": "ltr",
+    "signUp":"Sign Up",
+    "join":"Join us via Google account",
+    "signUp-google":"Sign Up with Google",
+    "signUp-email":"or with email",
+    "userName":"userName",
+    "email": "email",
+    "password":"password",
+    "have-account":"Already have an account?",
+    "Login-here":"Login here"
+
   }
 }

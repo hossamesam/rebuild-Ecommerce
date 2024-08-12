@@ -1,6 +1,6 @@
 {
-  "language":{
-    "language":"ar"
+  "language": {
+    "language": "ar"
   },
   "IndexPage": {
     "title": "contoh next-intl",
@@ -26,7 +26,7 @@
     "copyright": "© 2024 Aplikasi Anda. Hak cipta dilindungi."
   },
   "createpage": {
-    "dir":"rtl",
+    "dir": "rtl",
     "ProductType": "نوع المنتج",
     "ProductDetails": "تفاصيل المنتج",
     "nameAr": "اسم المنتج (بالعربي)",
@@ -38,5 +38,17 @@
     "sizes": "الاحجام المتوفرة",
     "cloros": "الالوان المتوفره",
     "files": "files"
+  },
+  "SignUp": {
+    "dir": "rtl",
+    "signUp":"تسجيل الدخول",
+    "join": "انضم إلينا عبر حساب جوجل",
+    "signUp-google": "تسجيل الدخول عن طريق جوجل",
+    "signUp-email":"    او عن طريق الايميل",
+    "userName": "اسم المستخدم",
+    "email": "البريد الإلكتروني",
+    "password": "الرقم السري",
+    "have-account":"لديك حساب بالفعل",
+    "Login-here":"الدخول مباشرة"
   }
 }
