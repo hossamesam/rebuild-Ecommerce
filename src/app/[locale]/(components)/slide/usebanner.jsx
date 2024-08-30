@@ -4,6 +4,7 @@ import React from "react";
 import Slider from "./slidera";
 import "./slider.css";
 import { Box } from "@mui/material";
+import { usePathname } from "next/navigation";
 
 const images = [
   {
@@ -18,11 +19,16 @@ const images = [
 ];
 
 const Usebanner = () => {
+  const pathname = usePathname();
+  const path = pathname.split("/").slice(2).join("/");
+
   return (
     <>
+    {path !== "logIn" &&      
       <Box className={"h-96"}>
         <Slider imageList={images} width="100%" height={"400px"} />
-      </Box>
+      </Box>}
+
     </>
   );
 };

@@ -81,7 +81,7 @@ const Slidera = ({
             style={{
               width: width,
               height: height,
-              objectFit: "cover",
+              objectFit: "fill",
             }}
             alt="image"
           />
@@ -98,19 +98,19 @@ const Slidera = ({
             </div>
           )}
           {showDotControls && (
-            <div className="dots">
+            <div className="dots z-10">
               {imageList.map((el, index) => {
                 if (index !== active) {
                   return (
                     <div
                       key={index}
-                      className="dot"
+                      className="dot z-10"
                       data-key={index}
                       onClick={dotClickHandler}
                     />
                   );
                 } else {
-                  return <div key={index} className="activeDot"></div>;
+                  return <div key={index} className="activeDot "></div>;
                 }
               })}
             </div>

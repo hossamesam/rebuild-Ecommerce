@@ -7,7 +7,7 @@ import shoes_catogrey from '@/../public/image_catogrey/shoes_catogrey.jpg';
 import women_catogrey from '@/../public/image_catogrey/women_catogrey.jpg';
 import Image from 'next/image';
 import type { nav } from '../(components)/header'
-import { redirect, useRouter } from 'next/navigation';
+import { redirect, usePathname, useRouter } from 'next/navigation';
 import { Link } from '@/navigation';
 
 
@@ -21,20 +21,21 @@ function Popover(props: nav) {
     rot === "rotate-0" ? setrot("rotate-90") : setrot("rotate-0")
   }
 
+  const pathname = usePathname();
+  const path = pathname.split("/").slice(2).join("/");
 
 
 
   return (
     <div>
+{path !== "logIn" && 
       <button onClick={openPop} className=' flex justify-center items-center gap-2 w-full h-12 bg-gray-500'>
         <span className=' font-sans font-bold text-2xl text-white '>{props.menu}</span>
         <CircleChevronRight className={rot + ' text-white size-8'} strokeWidth={3} />
-      </button>
+      </button>}
 
 
-
-
-      <nav className={open + '  z-50 ease-out bg-neutral-100 absolute   grid-cols-4 p-4 items-center max-sm:gap-2  gap-4 '}>
+      <nav className={open + '  z-40 ease-out bg-neutral-100 absolute   grid-cols-4 p-4 items-center max-sm:gap-2  gap-4 '}>
         <Link href={{ pathname: "/man_store" }} onClick={openPop} className='relative  h-full w-full  object-cover rounded-lg' >
           <Image className="h-full w-full  object-cover object-top rounded-lg " src={man_catogrey} alt={'man_catogrey'} />
           <div className="absolute max-sm:text-xs   flex w-full h-1/5 bottom-0 items-center justify-center text-white bg-black font-sans font-bold">{props.mens}</div>
@@ -51,10 +52,7 @@ function Popover(props: nav) {
           <Image className='h-full w-full  object-cover object-top rounded-lg ' src={shoes_catogrey} alt={'shoes_catogrey'} />
           <div className='absolute max-sm:text-xs flex w-full h-1/5 items-center bottom-0 justify-center text-white bg-black font-sans font-bold'>{props.shoes}</div>
         </Link>
-
-
       </nav>
-
 
 
 

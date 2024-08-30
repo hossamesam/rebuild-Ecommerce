@@ -5,6 +5,9 @@ import Header from '@/app/[locale]/(components)/header';
 import Popover from './(components)/Popover';
 import { useTranslations } from 'next-intl';
 import Usebanner from './(components)/slide/usebanner';
+import { usePathname } from 'next/navigation';
+import ShopSlide from './(components)/ShopSlide';
+import Popover2 from './(components)/popover2';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,6 +28,7 @@ export default function RootLayout({
 }: Readonly<RootLayoutProps>) {
   const t = useTranslations('Navigation');
   const c = useTranslations('catogry');
+  const s = useTranslations('SignUp');
   const [Mens, womens] = [String(c('Mens')), String(c('womens'))]
   return (
     <html lang={locale} dir='rtl'>
@@ -36,16 +40,19 @@ export default function RootLayout({
           women={String(c('womens'))}
           baby={String(c('Mens'))}
           shoes={String(c('shoes'))}
-          local={locale}
-        />
-        <Popover
+          signup={String(s('signup'))}
+          Login={String(s('Login'))}
+          descriptionsignUp={String(s('description-signUp'))}
+          descriptionLogin={String(s('description-Login'))}
+          local={locale} menu={''} home={''} />
+        {/* <Popover
           menu={String(t('menu'))}
           mens={String(c('Mens'))}
           women={String(c('womens'))}
           baby={String(c('babys'))}
-          shoes={String(c('shoes'))}
-        />
-        <Usebanner/>
+          shoes={String(c('shoes'))} home={''} signIn={''} ShoppingCar={''} local={''} signup={''} descriptionsignUp={''} Login={''} descriptionLogin={''} /> */}
+        <Usebanner />
+
         {children}
       </body>
     </html>

@@ -12,7 +12,19 @@ export default function Home() {
 
   return (
     <main>
-      <Box className="inset-x-10">
+      <Box
+        sx={{
+          mt: "0px",
+          mb: "50px",
+          display: "grid",
+          gridTemplateColumns: {
+            xs: "1fr  ",
+            sm: "1fr 1fr  ",
+            md: "1fr 1fr 1fr",
+            lg: "1fr 1fr 1fr 1fr ",
+            xl: "1fr 1fr 1fr 1fr 1fr 1fr  ",
+          },
+        }}>
         {man.map((product) => (
           <Tshirt
             src={product.imageSrc}

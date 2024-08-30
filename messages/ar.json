@@ -41,14 +41,20 @@
   },
   "SignUp": {
     "dir": "rtl",
-    "signUp":"تسجيل الدخول",
+    "signup":"تسجيل مستخدم جديد",
+    "description-signUp":"ssssssss",
+    "Login":"تسجيل الدخول",   
+    "description-Login":"sssssssss",
     "join": "انضم إلينا عبر حساب جوجل",
     "signUp-google": "تسجيل الدخول عن طريق جوجل",
     "signUp-email":"    او عن طريق الايميل",
-    "userName": "اسم المستخدم",
     "email": "البريد الإلكتروني",
     "password": "الرقم السري",
     "have-account":"لديك حساب بالفعل",
-    "Login-here":"الدخول مباشرة"
+    "Login-here":"الدخول مباشرة",
+    "username":"اسم المستخدم",
+    "firstName":"الأسم الأول",
+    "lastName":"الأسم الأخير"
+    
   }
 }
