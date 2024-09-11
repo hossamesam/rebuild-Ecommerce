@@ -7,7 +7,8 @@ import babyIcon from '@/../public/icon-drower/babyIcon.svg';
 import manIcon from '@/../public/icon-drower/manIcon.svg';
 import womanIcon from '@/../public/icon-drower/womanIcon.svg';
 import shoseIcon from '@/../public/icon-drower/shoseIcon.svg';
-
+import axios from 'axios';
+import { baseUrl } from "@/baseUrl";
 interface createtypes {
   ProductType: string,
   ProductDetails: string,
@@ -35,13 +36,13 @@ let setColors: any
 function Coloress() {
   [colors, setColors] = React.useState([]);
   const colorsHex = [
-    `#e2e8f0`, `#94a3b8`, `#475569`, `#1e293b`,
-    `#fecaca`, `#f87171`, `#dc2626`, `#991b1b`,
-    `#bfdbfe`, "#60a5fa", "#2563eb", "#1e40af",
-    `#fde68a`, "#fbbf24", `#d97706`, "#92400e",
+    "#e2e8f0", "#94a3b8", "#475569", "#1e293b",
+    "#fecaca", "#f87171", "#dc2626", "#991b1b",
+    "#bfdbfe", "#60a5fa", "#2563eb", "#1e40af",
+    "#fde68a", "#fbbf24", "#d97706", "#92400e",
     "#d9f99d", "#a3e635", "#65a30d", "#3f6212",
-    `#a5f3fc`, "#22d3ee", "#0891b2", "#155e75",
-    `#e9d5ff`, "#c084fc", "#9333ea", "#6b21a8",
+    "#a5f3fc", "#22d3ee", "#0891b2", "#155e75",
+    "#e9d5ff", "#c084fc", "#9333ea", "#6b21a8",
   ]
 
   return (
@@ -104,7 +105,6 @@ export default function Createpage({ dir, mens, women, baby, shoes, ProductType,
     { "title": shoes, "icon": shoseIcon, "link": "/shoses_store", "id": "5" },
   ]
 
-
   const [getsort, setSort] = React.useState([]);
   const [getprice, setPrice] = React.useState("EGY");
   const [getsize, setItemSize] = React.useState([]);
@@ -116,6 +116,13 @@ export default function Createpage({ dir, mens, women, baby, shoes, ProductType,
   const [getdescriptionTranslate, setdescriptionTranslate] = React.useState("");
   const [getCategory, setCategory] = React.useState("");
 
+  // axios.post(`${baseUrl}/api/items`, "Data",
+  //   {
+  //     'headers': {
+  //       'Content-Type': 'application/json;charset=UTF-8'
+  //     }
+  //   }
+  // )
 
   let x = false;
   return (
@@ -200,8 +207,6 @@ export default function Createpage({ dir, mens, women, baby, shoes, ProductType,
                   label="price"
                   onChange={(e) => {
                     setPrice(e.target.value)
-                    console.log("sortprice :" + e.target.value)
-
                   }}
                   value={getprice}
                 >
@@ -234,7 +239,6 @@ export default function Createpage({ dir, mens, women, baby, shoes, ProductType,
                   id="demo-simple-select"
                   onChange={(e) => {
                     setItemSize(e.target.value)
-                    console.log("size:" + getsize);
                   }}
                   multiple
                   value={getsize}
@@ -276,7 +280,6 @@ export default function Createpage({ dir, mens, women, baby, shoes, ProductType,
                 onChange={(e) => {
                   setSort([...getsort, URL.createObjectURL(e.target.files[0])])
                   console.log(e.target.value + "\n" + "URL = " + URL.createObjectURL(e.target.files[0]));
-                  console.log("sort : " + getsort);
                 }} />
             </label>
           </div>
@@ -297,27 +300,19 @@ export default function Createpage({ dir, mens, women, baby, shoes, ProductType,
             className='my-4 flex center'
             onClick={() => {
 
-              console.log("|||||||||||||||||||||||");
-              console.log("sort: " + getsort);
-              console.log("size: " + getsize);
-              console.log("colors: " + colors);
-              console.log("nameAr: " + getnameAr);
-              console.log("barcode: " + getbarcode);
-              console.log("sellPrice: " + getsellPrice);
-              console.log("description: " + getdescription);
-              console.log("Category: " + getCategory);
               const obj = {
                 "barcode": getbarcode,
                 "nameAr": getnameAr,
-                "nameTranslate": { "lang": getNameEn },
+                "nameTranslate": { "en": getNameEn },
                 "description": getdescription,
-                "descriptionTranslate": { "lang": getdescriptionTranslate },
+                "descriptionTranslate": { "en": getdescriptionTranslate },
                 "itemSize": getsize,
                 "sellPrice": getsellPrice,
                 "colors": colors,
-                "sort": getsort,
                 "category": getCategory,
               }
+              console.log(obj);
+
               // var json = JSON.stringify(obj);
               // var fs = require('fs');
               // fs.writeFile('baby.json', json, 'utf8',true);

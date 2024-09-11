@@ -1,20 +1,26 @@
-'use client'
-import React, {
-    MouseEvent, useEffect, useState,
-} from 'react';
-import Image from 'next/image';
-import { Box, CardMedia } from '@mui/material';
+"use client";
+import React, { MouseEvent, useEffect, useState } from "react";
+import Image from "next/image";
+import { Box, CardMedia } from "@mui/material";
 
-// Constants for magnifier size and zoom level
-const MAGNIFIER_SIZE = 180;
-const ZOOM_LEVEL = 3;
+export default function MagnifierImg({ sampleImg }: { sampleImg: any }) {
+    // Constants for magnifier size and zoom level
+    const MAGNIFIER_SIZE = 180;
+    const ZOOM_LEVEL = 3;
 
-// magnifierImg componenta
-const MagnifierImg = ({ sampleImg }: { sampleImg: any }) => {
+    // magnifierImg componenta
     // State variables
     const [zoomable, setZoomable] = useState(true);
-    const [imageSize, setImageSize] = useState<any>({ width: "100%", height: "100%" });
-    const [position, setPosition] = useState({ x: 100, y: 100, mouseX: 0, mouseY: 0 });
+    const [imageSize, setImageSize] = useState<any>({
+        width: "100%",
+        height: "100%",
+    });
+    const [position, setPosition] = useState({
+        x: 100,
+        y: 100,
+        mouseX: 0,
+        mouseY: 0,
+    });
 
     // Event handlers
     const handleMouseEnter = (e: MouseEvent) => {
@@ -39,10 +45,10 @@ const MagnifierImg = ({ sampleImg }: { sampleImg: any }) => {
         let x = e.clientX - left;
         let y = e.clientY - top;
         setPosition({
-            x: -x * ZOOM_LEVEL + (MAGNIFIER_SIZE / 2),
-            y: -y * ZOOM_LEVEL + (MAGNIFIER_SIZE / 2),
-            mouseX: x - (MAGNIFIER_SIZE / 2),
-            mouseY: y - (MAGNIFIER_SIZE / 2),
+            x: -x * ZOOM_LEVEL + MAGNIFIER_SIZE / 2,
+            y: -y * ZOOM_LEVEL + MAGNIFIER_SIZE / 2,
+            mouseX: x - MAGNIFIER_SIZE / 2,
+            mouseY: y - MAGNIFIER_SIZE / 2,
         });
     };
 
@@ -57,19 +63,23 @@ const MagnifierImg = ({ sampleImg }: { sampleImg: any }) => {
                     width: "40vw",
                     height: "auto",
                     position: "relative",
-                    overflow: "hidden"
-                }}>
-                <CardMedia className='object-cover border z-10'
+                    overflow: "hidden",
+                }}
+            >
+                <CardMedia
+                    className="object-cover border z-10"
                     alt=""
                     component="img"
-                    image={sampleImg} />
+                    image={sampleImg}
+                />
                 <div
                     style={{
                         backgroundPosition: `${position.x}px ${position.y}px`,
                         backgroundImage: `url(${sampleImg})`,
-                        backgroundSize: `${imageSize.width * ZOOM_LEVEL}px ${imageSize.height * ZOOM_LEVEL}px`,
-                        backgroundRepeat: 'no-repeat',
-                        display: zoomable ? 'block' : 'none',
+                        backgroundSize: `${imageSize.width * ZOOM_LEVEL}px ${imageSize.height * ZOOM_LEVEL
+                            }px`,
+                        backgroundRepeat: "no-repeat",
+                        display: zoomable ? "block" : "none",
                         top: `${position.mouseY}px`,
                         left: `${position.mouseX}px`,
                         width: `${MAGNIFIER_SIZE}px`,
@@ -82,4 +92,3 @@ const MagnifierImg = ({ sampleImg }: { sampleImg: any }) => {
     );
 };
 
-export default MagnifierImg;

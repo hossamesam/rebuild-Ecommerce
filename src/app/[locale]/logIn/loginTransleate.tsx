@@ -5,6 +5,9 @@ import { useRouter } from 'next/navigation';
 import { useForm } from "react-hook-form"
 import * as z from "zod";
 import axios from 'axios';
+import { baseUrl } from '@/baseUrl';
+import { useDispatch } from 'react-redux';
+import { signNow } from '@/Redux/HeaderSlice';
 
 type trans = {
   dir: string,
@@ -23,6 +26,7 @@ type trans = {
 }
 
 export default function LoginTransleate(props: trans) {
+  const dispatch = useDispatch()
   const signupSchema = z.object({
     email: z.string().min(1, { message: "required" }).email({ message: 'not vaild email' }),
     login: z.string().min(1, { message: "username must be at least 2 characters" }),
@@ -41,7 +45,7 @@ export default function LoginTransleate(props: trans) {
     resolver: zodResolver(signupSchema)
   })
 
-  const router = useRouter();
+  // const router = useRouter();
   // const [registers, setregisters] = useState<FormData>();
   // useEffect(() => {
   //   // http://localhost:8001/api/ahmed123456789
@@ -56,7 +60,7 @@ export default function LoginTransleate(props: trans) {
     console.log(users);
 
     // Replace this with a server action or fetch an API endpoint to authenticate
-    axios.post("http://localhost:8001/api/register", users,
+    axios.post(`${baseUrl}//api/register`, users,
       {
         'headers': {
           'Content-Type': 'application/json;charset=UTF-8'
@@ -263,7 +267,7 @@ export default function LoginTransleate(props: trans) {
 
             </form>
             <div className="mt-4 text-sm text-gray-600 text-center">
-              <p>{props.haveAccount} <a href="#" className="text-black hover:underline font-semibold ">{props.LoginHere}</a>
+              <p>{props.haveAccount} <span onClick={() => { dispatch(signNow()) }} className="text-black hover:underline font-semibold ">{props.LoginHere}</span>
               </p>
             </div>
           </div>

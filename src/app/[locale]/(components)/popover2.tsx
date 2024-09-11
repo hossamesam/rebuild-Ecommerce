@@ -7,7 +7,7 @@ import shoes_catogrey from '@/../public/image_catogrey/shoes_catogrey.jpg';
 import women_catogrey from '@/../public/image_catogrey/women_catogrey.jpg';
 import Image from 'next/image';
 import type { nav } from '../(components)/header'
-import { redirect, usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { Link } from '@/navigation';
 
 
@@ -29,7 +29,7 @@ function Popover2(props: nav) {
     return (
         <div>
 
-            <nav className={'grid  ease-out bg-neutral-100 absolute w-full p-8  grid-cols-2 items-center max-sm:gap-2  gap-16 '}>
+            <nav className={'grid  ease-out bg-neutral-100 absolute w-full p-8  grid-cols-2 max-sm:grid-cols-1 items-center max-sm:gap-2  gap-16 '}>
                 <Link href={{ pathname: "/man_store" }} onClick={openPop} className='relative   h-96 w-full object-contain rounded-lg filter  hover:scale-105 hover:grayscale-[50%]' >
                     <Image className="h-full w-full  object-cover object-right-top rounded-lg " src={man_catogrey} alt={'man_catogrey'} />
                     <div className="absolute max-sm:text-xs   flex w-full h-1/5 bottom-0 items-center justify-center text-white bg-black font-sans font-bold">{props.mens}</div>

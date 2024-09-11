@@ -66,9 +66,7 @@ const Slidera = ({
           (showArrowControls && loop)) && (
           <div
             className="leftClick"
-            style={{
-              height: height,
-            }}
+
             onClick={rightClickHandle}>
             <div className="twice">
               <Image className="button c1" src={backButton} alt="back" />
@@ -89,9 +87,7 @@ const Slidera = ({
             (showArrowControls && loop)) && (
             <div
               className="rightClick "
-              style={{
-                height: height,
-              }}
+
               onClick={leftClickHandle}>
               <Image className="button c2" src={nextButton} alt="next" />
               <Image className="button" src={nextButton} alt="next" />

@@ -1,4 +1,4 @@
-import { Box, Button, IconButton, Paper, Stack } from "@mui/material";
+import { Box, Button, CardActions, IconButton, Paper, Stack } from "@mui/material";
 import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -9,6 +9,8 @@ import Link from "next/link";
 import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
 import CircleIcon from "@mui/icons-material/Circle";
+import { AlignJustify, X, CircleUserRound, ShoppingCart } from "lucide-react";
+
 // tooltip <تلميحات الالوان> ☟☟☟☟☟☟☟☟☟☟
 // const BootstrapTooltip = styled(({ className, ...props }: TooltipProps) => (
 //   <Tooltip {...props} arrow classes={{ popper: className }} />
@@ -21,18 +23,19 @@ import CircleIcon from "@mui/icons-material/Circle";
 //   },
 // }));
 
-// tooltip <تلميحات الالوان> ☟☟☟☟☟☟☟☟☟☟
-const tooltip = (
-  <Stack container gap={0.5} direction="row">
-    <CircleIcon sx={{ color: "black" }} />
-    <CircleIcon sx={{ color: "white" }} />
-    <CircleIcon sx={{ color: "red" }} />
-    <CircleIcon sx={{ color: "silver" }} />
-  </Stack>
-);
+
 
 // jsx☟☟☟☟☟☟☟☟☟☟
-function Tshirt({kind, src, alt, id, href, name, color, price, description }) {
+function Tshirt({ kind, src, alt, id, href, name, color, price, description }) {
+  // tooltip <تلميحات الالوان> ☟☟☟☟☟☟☟☟☟☟
+  const tooltip = (
+    <Stack container gap={0.5} direction="row">
+      <CircleIcon sx={{ color: "black" }} />
+      <CircleIcon sx={{ color: "white" }} />
+      <CircleIcon sx={{ color: "red" }} />
+      <CircleIcon sx={{ color: "silver" }} />
+    </Stack>
+  );
   return (
     <>
       <Card
@@ -65,20 +68,27 @@ function Tshirt({kind, src, alt, id, href, name, color, price, description }) {
                 }}>
                 {description}
               </Typography>
-              <Box>
-                <Typography variant="h5" color="text.secondary">
-                  {price}
-                </Typography>
-                <Tooltip title={tooltip} placement="right">
-                  <IconButton
-                    sx={{ position: "absolute", left: "5px", bottom: "12px" }}>
-                    <ColorLensIcon color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </Box>
+
             </CardContent>
           </CardActionArea>
         </Link>
+
+        <CardActions sx={{ position: "relative", display: "flex", padding: "20px" }}>
+          <Box>
+            <Typography variant="h5" color="text.secondary">
+              {price}
+            </Typography>
+          </Box>
+          <Tooltip title={tooltip} placement="right" sx={{ position: "absolute", left: "0px" }} >
+            <IconButton>
+              <ColorLensIcon color="primary" />
+            </IconButton>
+          </Tooltip>
+          <IconButton onClick={"/"} sx={{ position: "absolute", left: "40px" }}>
+            <ShoppingCart />
+          </IconButton>
+        </CardActions>
+
       </Card>
     </>
   );

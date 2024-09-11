@@ -7,7 +7,7 @@ export default function page() {
   const c = useTranslations('catogry');
 
   return (
-    <>
+    < >
       <Createpage
         mens={c('Mens')}
         women={c('womens')}

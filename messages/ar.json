@@ -41,9 +41,9 @@
   },
   "SignUp": {
     "dir": "rtl",
-    "signup":"تسجيل مستخدم جديد",
+    "signup":"تسجيل الدخول",
     "description-signUp":"ssssssss",
-    "Login":"تسجيل الدخول",   
+    "Login":" تسجيل مستخدم جديد",   
     "description-Login":"sssssssss",
     "join": "انضم إلينا عبر حساب جوجل",
     "signUp-google": "تسجيل الدخول عن طريق جوجل",

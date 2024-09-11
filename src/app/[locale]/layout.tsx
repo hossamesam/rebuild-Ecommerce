@@ -51,6 +51,7 @@ export default function RootLayout({
           women={String(c('womens'))}
           baby={String(c('babys'))}
           shoes={String(c('shoes'))} home={''} signIn={''} ShoppingCar={''} local={''} signup={''} descriptionsignUp={''} Login={''} descriptionLogin={''} /> */}
+
         <Usebanner />
 
         {children}

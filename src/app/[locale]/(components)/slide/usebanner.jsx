@@ -24,10 +24,10 @@ const Usebanner = () => {
 
   return (
     <>
-    {path !== "logIn" &&      
-      <Box className={"h-96"}>
-        <Slider imageList={images} width="100%" height={"400px"} />
-      </Box>}
+      {path !== "logIn" &&
+        <Box className={" bg-black"}>
+          <Slider imageList={images} width="100%" height={"400px"} />
+        </Box>}
 
     </>
   );

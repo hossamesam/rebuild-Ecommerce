@@ -1,5 +1,5 @@
 "use client";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import logo from "@/../public/logoforweb.jpg";
 import logoA from "@/../public/logoE.jpg";
 import Image from "next/image";
@@ -42,16 +42,20 @@ export default function Header(props: nav) {
     close_menu_shop === "hidden" ? setclose_menu_shop("flex ") : setclose_menu_shop("hidden");
   };
 
-  console.log("local: " + props.local);
 
   const pathname = usePathname();
   const router = useRouter();
+
   const path = pathname.split("/").slice(2).join("/");
-  router.push(`/${props.local}/${path}`);
-  console.log("path :" + pathname.split("/").slice(2));
+  useEffect(() => {
+    router.push(`/${props.local}/${path}`);
+    console.log("local: " + props.local);
+    console.log("path :" + pathname.split("/").slice(2));
+  }, [])
+
 
   return (
-    <div  className=" bg-teal-400">
+    <div className=" bg-teal-400">
 
       <header className="h-24   max-sm:h-12 bg-neutral-950 flex flex-row items-center justify-between dark:bg-red-500">
 
@@ -62,7 +66,7 @@ export default function Header(props: nav) {
               src={logo}
               alt="logo"
             /> */}
-            e-commerce
+            ecommerce
           </a>
         </nav>
         <div
@@ -101,33 +105,28 @@ export default function Header(props: nav) {
           id="log-in_And_buy"
           className=" flex flex-row items-center justify-center   ml-4 mt-2 gap-2"
         >
-          <button
-            type="submit"
-            className="flex items-center justify-center flex-row  max-sm:h-10 max-sm:w-10 max-sm:bg-slate-500 max-sm:rounded-full max-sm:hover:bg-slate-600 hover:scale-105 hover:border-[1px] rounded p-1 "
+
+          {/* <a href={location.pathname == "/ar" ? "/en" : "/ar"} className='flex gap-1'> */}
+          <Link
+            locale={props.local === "ar" ? "en" : "ar"}
+            href={`/${path}`}
+            className="flex gap-1"
           >
-            {/* <a href={location.pathname == "/ar" ? "/en" : "/ar"} className='flex gap-1'> */}
-            <Link
-              locale={props.local === "ar" ? "en" : "ar"}
-              href={`/${path}`}
-              className="flex gap-1"
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="#fff"
+              width="22px"
+              height="22px"
+              viewBox="0 0 24 24"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="#fff"
-                width="22px"
-                height="22px"
-                viewBox="0 0 24 24"
-              >
-                <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z" />
-              </svg>
-              <button
-                type="button"
-                className="text-md  max-sm:hidden sm:whitespace-nowrap  sm:text-[12px] font-bold text-white "
-              >
-                En|Ar
-              </button>
-            </Link>
-          </button>
+              <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z" />
+            </svg>
+            <div
+              className="text-md  max-sm:hidden sm:whitespace-nowrap  sm:text-[12px] font-bold text-white "
+            >
+              En|Ar
+            </div>
+          </Link>
 
           <Loginui
             signIn={props.signIn}
@@ -179,7 +178,7 @@ export default function Header(props: nav) {
         {/* ........................................ menu .............................................. */}
         <div
           className={
-            state_menu + " bg-gray-900/45  absolute h-full w-full  top-0 z-20 "
+            state_menu + "  bg-gray-900/45  fixed h-full w-full  top-0 z-20 "
           }
         >
           <button
@@ -188,7 +187,7 @@ export default function Header(props: nav) {
             className=" h-full w-5/6"
           />
 
-          <div className="bg-slate-50 text-black absolute h-full w-80 right-0 border-2  ">
+          <div className="bg-slate-50 text-black fixed h-full w-80 right-0 border-2  ">
             <Image className="h-48 w-full " src={logoA} alt="logo" />
             <hr className="border-gray-300  border-1" />
 
@@ -214,8 +213,8 @@ export default function Header(props: nav) {
                 </div>
               </a>
             </div>
-
             <hr className="border-gray-300  border-1" />
+
 
             <div className=" py-4 px-5 gap-8 flex flex-col">
               <a
@@ -398,7 +397,7 @@ export default function Header(props: nav) {
             </div>
           </div>
 
-          <div className="absolute right-[320px]  rounded-l-full w-16 h-14 bg-slate-50  flex justify-center items-center -z-10">
+          <div className="fixed right-[320px]  rounded-l-full w-16 h-14 bg-slate-50  flex justify-center items-center -z-10">
             <button onClick={close_menu} type="submit" title="escap">
               <X />
               <span className="sr-only">escap main menu</span>
@@ -408,7 +407,7 @@ export default function Header(props: nav) {
         {/* ........................................shop menu.............................................. */}
         <div
           className={
-            close_menu_shop + " bg-gray-900/45  absolute h-full w-full  top-0 z-20 "
+            close_menu_shop + " fixed bg-gray-900/45   h-full w-full  top-0 z-20 "
           }
         >
           <button
@@ -417,7 +416,7 @@ export default function Header(props: nav) {
             className=" h-full w-5/6"
           />
 
-          <div className="bg-slate-50 text-black absolute h-full w-80 right-0 border-2  ">
+          <div className="fixed bg-slate-50 text-black  h-full w-80 right-0 border-2  ">
 
 
             <hr className="border-gray-300  border-1" />
@@ -463,141 +462,6 @@ export default function Header(props: nav) {
                 </svg>
                 <h6 className="text-2xl font-bold text-black font-['Roboto'] ">
                   {props.mens}
-                </h6>
-              </a>
-              <a
-                href="/"
-                className="flex flex-row gap-2 text-black items-center  w-full hover:bg-gray-100 hover:scale-110 "
-              >
-                <svg
-                  width="38px"
-                  height="38px"
-                  viewBox="0 0 50 62"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlnsXlink="http://www.w3.org/1999/xlink"
-                  aria-hidden="true"
-                  role="img"
-                  className="iconify iconify--emojione-monotone"
-                  preserveAspectRatio="xMidYMid meet"
-                >
-                  <path
-                    d="M44.887 52.955c-1.899 0-4.536 2.559-6.443 2.559c-2.31 0-4.46-2.559-6.443-2.559s-4.135 2.559-6.442 2.559c-1.906 0-4.543-2.559-6.443-2.559c-1.841 0-5.085 1.507-6.115 2.01c.002.417.038.851.062 1.277c1.521-.758 3.795-1.754 5.251-1.754c2.017 0 4.817 2.774 6.843 2.774c2.454 0 4.739-2.774 6.845-2.774s4.391 2.774 6.845 2.774c2.026 0 4.828-2.774 6.844-2.774c1.46 0 3.747 1.004 5.268 1.763L51 54.965c-1.028-.502-4.273-2.01-6.113-2.01"
-                    fill="#000000"
-                  ></path>
-                  <path
-                    d="M38.311 59.869c-2.263 0-4.368-2.559-6.31-2.559c-1.941 0-4.047 2.559-6.311 2.559c-1.865 0-4.449-2.559-6.309-2.559c-1.787 0-4.92 1.631-5.96 2.2c.134.763.29 1.533.497 2.326c0 0 3.962-2.395 6.028-2.395c1.776 0 4.244 2.558 6.026 2.558c2.161 0 4.174-2.558 6.028-2.558S35.868 62 38.029 62c1.781 0 4.251-2.558 6.025-2.558c2.064 0 6.028 2.395 6.028 2.395a28.12 28.12 0 0 0 .497-2.326c-1.038-.567-4.174-2.2-5.959-2.2c-1.861 0-4.444 2.558-6.309 2.558"
-                    fill="#000000"
-                  ></path>
-                  <path
-                    d="M18.771 51.783c1.949 0 4.656 2.559 6.614 2.559c2.371 0 4.58-2.559 6.615-2.559s4.245 2.559 6.615 2.559c1.96 0 4.665-2.559 6.617-2.559c1.631 0 4.345 1.092 5.734 1.732c-.615-11.442-8.839-18.949-11.486-24.406h.521v-6h-.609c1.265-3.444 3.636-8.011 2.501-12.723c0 0-.248.001-.666.024V2h-1.216v8.517c-2.137.241-5.636.938-8.011 2.964c-2.375-2.027-5.876-2.723-8.013-2.964V2h-1.213v8.411c-.417-.023-.666-.024-.666-.024c-1.137 4.712 1.235 9.278 2.501 12.723h-.611v6h.522c-2.646 5.457-10.864 12.965-11.481 24.405c1.39-.642 4.099-1.732 5.732-1.732m20.231-27.549v3.75H37.65v.002c2.644 4.923 3.567 13.285 3.567 13.285l-4.896 1.758s-.004-6.952-1.668-14.18c.328-.328.537-.89.637-1.538l2.03 4.475c-.174-1.7-1.22-3.6-1.987-4.832c.084-.941-.039-1.985-.35-2.72h4.019m-8.707-.632c.697-.697 3.137-.697 3.835 0c.707.706 1.158 4.134 0 5.291c-.694.693-3.142.693-3.835 0c-1.277-1.277-.649-4.642 0-5.291m-3.27 4.382h-2.027v-3.75h4.443c-.292.688-.421 1.65-.365 2.545c-.929 1.312-1.596 2.724-1.878 3.304l1.939-2.758c.07.454.193.867.375 1.186c-.932 3.082-1.756 8.409-1.756 8.409l-3.788-.875s.924-4.538 3.057-8.061"
-                    fill="#000000"
-                  ></path>
-                </svg>
-                <h6 className="text-2xl font-bold text-black font-['Roboto'] ">
-                  {props.women}
-                </h6>
-              </a>
-
-              <a
-                href="/"
-                className="flex flex-row gap-2 text-black items-center  w-full hover:bg-gray-100 hover:scale-110 "
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="38px"
-                  height="38px"
-                  viewBox="0 0 400 600"
-                >
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                  <g
-                    id="SVGRepo_tracerCarrier"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ></g>
-                  <g id="SVGRepo_iconCarrier">
-
-                    <g>
-
-                      <g>
-
-                        <g>
-
-                          <rect
-                            x="213.334"
-                            y="192.002"
-                            width="85.333"
-                            height="42.667"
-                          ></rect>
-                          <path d="M255.997,85.333c34.624,0,63.275-28.224,63.851-62.912V0h-0.021H192.167h-0.021v22.784 C192.722,57.109,221.394,85.333,255.997,85.333z"></path>
-                          <path d="M479.446,53.719l-29.44-17.664c-26.965-16.192-56.725-26.709-87.488-31.979v18.709 c-0.981,58.176-48.768,105.216-106.517,105.216S150.465,80.962,149.484,23.149V4.077c-30.763,5.269-60.523,15.787-87.488,31.979 l-29.44,17.664C12.481,65.773,0.001,87.81,0.001,111.234c0,24.469,12.715,46.293,34.027,58.347 c21.312,12.096,46.549,11.755,67.541-0.832l5.099-3.051v280.021c0,32.341,22.955,60.459,53.397,65.408 c18.795,3.072,37.739-2.197,52.053-14.357c14.336-12.203,22.549-29.973,22.549-48.768v-83.051c0-11.456,7.723-21.696,17.6-23.317 c6.464-1.003,12.693,0.64,17.536,4.779c4.8,4.053,7.531,9.984,7.531,16.256v83.051c0,32.341,22.955,60.459,53.397,65.408 c3.499,0.576,7.019,0.875,10.517,0.875c15.168,0,29.867-5.333,41.515-15.232c14.357-12.181,22.571-29.973,22.571-48.768V165.698 l5.099,3.051c20.992,12.587,46.251,12.928,67.541,0.832c21.312-12.053,34.027-33.877,34.027-58.347 C512.001,87.81,499.521,65.773,479.446,53.719z M341.334,256.002c0,11.776-9.557,21.333-21.333,21.333h-128 c-11.776,0-21.333-9.557-21.333-21.333v-85.333c0-11.776,9.557-21.333,21.333-21.333h128c11.776,0,21.333,9.557,21.333,21.333 V256.002z"></path>
-                        </g>
-                      </g>
-                    </g>
-                  </g>
-                </svg>
-                <h6 className="text-2xl font-bold text-black font-['Roboto'] ">
-                  {props.baby}
-                </h6>
-              </a>
-              <a
-                href="/"
-                className="flex flex-row gap-2 text-black items-center  w-full hover:bg-gray-100 hover:scale-110 "
-              >
-                <svg
-                  height="38px"
-                  width="38px"
-                  version="1.1"
-                  id="_x32_"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlnsXlink="http://www.w3.org/1999/xlink"
-                  viewBox="0 0 450 550"
-                  xmlSpace="preserve"
-                  fill="#000000"
-                >
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                  <g
-                    id="SVGRepo_tracerCarrier"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ></g>
-                  <g id="SVGRepo_iconCarrier">
-
-                    <style type="text/css"> </style>
-                    <g>
-
-                      <path
-                        className="st0"
-                        d="M264.144,416.889L14.642,205.12L0,222.38l249.532,211.798l0.034,0.03 c28.365,23.868,64.366,37.003,101.443,37.01h159.922v-22.638H351.01C319.292,448.581,288.402,437.322,264.144,416.889z"
-                      ></path>
-                      <path
-                        className="st0"
-                        d="M203.394,336.186l56.013,47.136c-2.07-10.412-6.623-21.543-15.617-31.812 c-6.968-7.966-21.928-24.401-39.924-44.533C203.397,316.698,203.21,326.524,203.394,336.186z"
-                      ></path>
-                      <path
-                        className="st0"
-                        d="M141.098,205.698c-9.717-8.664-18.354-16.682-25.496-23.824c6.923,10.704,13.333,20.425,22.882,32.494 C139.323,211.511,140.198,208.624,141.098,205.698z"
-                      ></path>
-                      <path
-                        className="st0"
-                        d="M194.91,251.657c-14.556-12.107-28.463-23.816-41.054-34.745c-0.893,4.133-1.785,8.371-2.64,12.729 c9.852,11.312,22.541,24.874,39.826,42.291C192.187,265.361,193.466,258.587,194.91,251.657z"
-                      ></path>
-                      <path
-                        className="st0"
-                        d="M330.506,424.022c-0.372-18.197-4.4-63.248-33.957-88.205c-27.911-23.568-59.254-49.094-88.812-73.532 c-0.912,7.576-1.751,15.587-2.46,23.838c1.938,1.92,3.889,3.841,5.929,5.836c40.044,39.253,71.222,70.09,74.808,113.228 C299.34,414.654,314.525,421.052,330.506,424.022z"
-                      ></path>
-                      <path
-                        className="st0"
-                        d="M143.198,285.524l41.136,34.617c0.946-9.032,2.205-19.405,3.886-30.746 c-12.943-14.635-26.625-30.327-39.594-45.689C146.277,257.298,144.327,271.497,143.198,285.524z"
-                      ></path>
-                      <path
-                        className="st0"
-                        d="M134.872,227.196c-20.23-24.656-37.018-46.956-43.656-60.473l5.58-6.683c-0.011-0.008-0.022-0.023-0.022-0.023 l6.676-8.266c0,0,17.463,16.742,42.478,39.05c4.013-11.837,8.547-23.936,13.682-35.975l9.5,3.586c0,0-5.555,17.357-11.623,42.605 c12.654,11.087,26.628,23.028,40.951,34.7c2.686-11.394,5.788-23.043,9.392-34.707l9.35,2.483c0,0-3.616,16.922-7.156,41.533 c15.355,12.174,30.777,23.681,45.052,33.132c61.016,40.431,102.772,82.721,107.136,147.785c20.744,0,66.91,0,109.11,0 c56.584,0,48.096-56.58,11.315-65.064c-24.809-5.731-56.685-18.895-56.685-18.895c-12.576-4.193-22.867-13.39-28.44-25.421 c0,0-1.373-2.902-3.679-7.824l-46.202,13.975c-5.049,1.522-10.378-1.335-11.904-6.376c-1.527-5.048,1.327-10.382,6.375-11.904 l43.526-13.165c-3.744-7.966-8.087-17.237-12.662-27.018l-43.172,13.058c-5.04,1.523-10.378-1.327-11.904-6.375 c-1.526-5.049,1.331-10.374,6.376-11.904l40.531-12.257c-4.313-9.256-8.607-18.475-12.575-27.041l-40.262,12.174 c-5.044,1.53-10.377-1.327-11.904-6.376c-1.522-5.04,1.328-10.373,6.372-11.896l37.715-11.409 c-5.404-11.77-9.335-20.485-10.374-23.186c-4.546-11.806-14.511-44.533-37.254-26.328 c-37.389,29.922-105.596,21.138-123.204-11.574c-13.202-24.52-5.66-50.924,0-71.672c4.519-16.585-18.869-42.441-35.844-19.81 c-12.002,16-113.171,135.806-113.171,135.806l100.457,84.537C127.228,257.77,130.544,243.151,134.872,227.196z"
-                      ></path>
-                    </g>
-                  </g>
-                </svg>
-                <h6 className="text-2xl font-bold text-black font-['Roboto'] ">
-                  {props.shoes}
                 </h6>
               </a>
             </div>
@@ -611,7 +475,6 @@ export default function Header(props: nav) {
           </div>
         </div>
       </header >
-
       <div className="sm:hidden w-full flex bg-neutral-950 justify-center items-center p-3 z-50">
         <div id="search-phon" className="   grow relative  text-gray-600">
           <div className="w-full relative">
@@ -638,7 +501,6 @@ export default function Header(props: nav) {
                 <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
               </svg>
             </button>
-
           </div>
         </div>
       </div>

@@ -1,7 +1,8 @@
-import { useTranslations } from 'next-intl';
-import React from 'react'
-import { FormEvent } from 'react'
-import LoginTransleate from './loginTransleate';
+import { useTranslations } from "next-intl";
+import React from "react";
+import { FormEvent } from "react";
+import LoginTransleate from "./loginTransleate";
+import Recaptcha from "../(components)/Recaptcha";
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -9,30 +10,30 @@ interface RootLayoutProps {
     locale: string;
   };
 }
+
 export default function logintrans({
   params: { locale },
 }: Readonly<RootLayoutProps>) {
-
-  const t = useTranslations('SignUp');
+  const t = useTranslations("SignUp");
 
   return (
     <>
       <LoginTransleate
-        dir={t('dir')}
-        signUp={t('signup')}
-        join={t('join')}
-        signUpGoogle={t('signUp-google')}
-        signUpEmail={t('signUp-email')}
-        haveAccount={t('have-account')}
-        email={t('email')}
-        password={t('password')}
-        LoginHere={t('Login-here')}
-        login={t('username')}
-        firstName={t('firstName')}
-        lastName={t('lastName')}
+        dir={t("dir")}
+        signUp={t("Login")}
+        join={t("join")}
+        signUpGoogle={t("signUp-google")}
+        signUpEmail={t("signUp-email")}
+        haveAccount={t("have-account")}
+        email={t("email")}
+        password={t("password")}
+        LoginHere={t("Login-here")}
+        login={t("username")}
+        firstName={t("firstName")}
+        lastName={t("lastName")}
         langKey={locale}
       />
+      {/* <Recaptcha /> */}
     </>
-  )
+  );
 }
-
