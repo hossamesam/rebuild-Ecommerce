@@ -1,6 +1,6 @@
 {
-  "language":{
-    "language":"en"
+  "language": {
+    "language": "en"
   },
   "IndexPage": {
     "title": "next-intl example",
@@ -14,7 +14,7 @@
     "home": "hdomi",
     "menu": "menu",
     "signIn": "sign up",
-    "ShoppingCar": "Shopping car"
+    "ShoppingCar": "cart"
   },
   "catogry": {
     "Mens": "Men's Clothing",
@@ -39,22 +39,24 @@
     "cloros": "colors",
     "files": "files"
   },
-  "SignUp":{
+  "SignUp": {
     "dir": "ltr",
-    "signup":"Sign Up",
-    "description-signUp":"sssssss",
-    "Login":"log-in",
-    "description-Login":"ssssssss",
-    "join":"Join us via Google account",
-    "signUp-google":"Sign Up with Google",
-    "signUp-email":"or with email",
+    "signup": "Sign Up",
+    "description-signUp": "sssssss",
+    "Login": "log-in",
+    "description-Login": "ssssssss",
+    "join": "Join us via Google account",
+    "signUp-google": "Sign Up with Google",
+    "signUp-email": "or with email",
     "email": "email",
-    "password":"password",
-    "have-account":"Already have an account?",
-    "Login-here":"Login here",
-    "username":"username",
-    "firstName":"first name",
-    "lastName":"last name"
-
+    "password": "password",
+    "have-account": "Already have an account?",
+    "Login-here": "Login here",
+    "username": "username",
+    "firstName": "first name",
+    "lastName": "last name"
+  },
+  "filters": {
+    "price": "price"
   }
 }

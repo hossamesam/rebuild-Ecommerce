@@ -7,8 +7,10 @@ import babyIcon from '@/../public/icon-drower/babyIcon.svg';
 import manIcon from '@/../public/icon-drower/manIcon.svg';
 import womanIcon from '@/../public/icon-drower/womanIcon.svg';
 import shoseIcon from '@/../public/icon-drower/shoseIcon.svg';
-import axios from 'axios';
+import axios, { Axios } from 'axios';
 import { baseUrl } from "@/baseUrl";
+import FormData from 'form-data'
+
 interface createtypes {
   ProductType: string,
   ProductDetails: string,
@@ -30,7 +32,7 @@ interface createtypes {
 
 
 
-let colors: string | string[]
+let colors: string[]
 let setColors: any
 
 function Coloress() {
@@ -66,15 +68,15 @@ function Coloress() {
               color='warning'
               style={{ backgroundColor: colur }}
               className={`before:content[''] peer relative h-5 w-5 cursor-pointer
-            before:left-2/4 before:block before:h-6 before:w-6 
-            appearance-none rounded-full border before:-translate-y-2/4 before:-translate-x-2/4 
+            before:left-2/4 before:block before:h-6 before:w-6
+            appearance-none rounded-full border before:-translate-y-2/4 before:-translate-x-2/4
             before:rounded-full  before:top-2/4
             border-gray-900/20 before:transition-opacity
-            transition-all before:absolute 
-            before:bg-gray-200 before:opacity-0  
-            checked:border-gray-900 
+            transition-all before:absolute
+            before:bg-gray-200 before:opacity-0
+            checked:border-gray-900
             #checked:bg-[#6925ce]
-            checked:before:bg-blue-50 
+            checked:before:bg-blue-50
             hover:scale-105 hover:before:opacity-0`}
               id="customStyle"
             />
@@ -245,12 +247,12 @@ export default function Createpage({ dir, mens, women, baby, shoes, ProductType,
                   input={<OutlinedInput label="Name" />}
 
                 >
-                  <MenuItem value={"small"} >small</MenuItem>
-                  <MenuItem value={"md"} >md</MenuItem>
-                  <MenuItem value={"l"} >l</MenuItem>
-                  <MenuItem value={"xl"} >xl</MenuItem>
-                  <MenuItem value={"xxl"} >xxl</MenuItem>
-                  <MenuItem value={"xxxl"} >xxxl</MenuItem>
+                  <MenuItem value={"SM"} >small</MenuItem>
+                  <MenuItem value={"MD"} >md</MenuItem>
+                  <MenuItem value={"L"} >l</MenuItem>
+                  <MenuItem value={"XL"} >xl</MenuItem>
+                  <MenuItem value={"XXL"} >xxl</MenuItem>
+                  <MenuItem value={"XXXL"} >xxxl</MenuItem>
 
                 </Select>
               </FormControl>
@@ -278,6 +280,18 @@ export default function Createpage({ dir, mens, women, baby, shoes, ProductType,
               <input id="dropzone-file" type="file" className="hidden " multiple
 
                 onChange={(e) => {
+                  let formData = new FormData();
+                  formData.append("file", e.target.files[0]);
+
+                  axios.post(`${baseUrl}/api/attachments`, formData, {
+                    "headers": {
+                      "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNjc3NDUzNywiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzI2Njg4MTM3fQ.lhzgf8kKUaJsRi5H_wmNk4_OvrvruNUosvWb6tA2yrgYksFedzLj5TO7pmzTMz6FTFAuAPbdOMXr-jYLddeaRA",
+                      'Content-Type': `multipart/form-data `,
+                    }
+                  })
+                    .then((res) => console.log(res))
+                    .catch((err) => console.log(err))
+
                   setSort([...getsort, URL.createObjectURL(e.target.files[0])])
                   console.log(e.target.value + "\n" + "URL = " + URL.createObjectURL(e.target.files[0]));
                 }} />
@@ -306,13 +320,25 @@ export default function Createpage({ dir, mens, women, baby, shoes, ProductType,
                 "nameTranslate": { "en": getNameEn },
                 "description": getdescription,
                 "descriptionTranslate": { "en": getdescriptionTranslate },
-                "itemSize": getsize,
+                "sizes": getsize,
                 "sellPrice": getsellPrice,
-                "colors": colors,
-                "category": getCategory,
+                // "colors": colors,
+                "colors": [{ id: 1 }],
+                "category": { "id": getCategory },
               }
               console.log(obj);
+              axios.post(`${baseUrl}/api/items`, obj,
+                {
+                  'headers': {
+                    'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNjc3NDUzNywiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzI2Njg4MTM3fQ.lhzgf8kKUaJsRi5H_wmNk4_OvrvruNUosvWb6tA2yrgYksFedzLj5TO7pmzTMz6FTFAuAPbdOMXr-jYLddeaRA'
 
+                  }
+                })
+                .then((request) => {
+                  console.log(request)
+
+                })
+                .catch((err) => console.log(err))
               // var json = JSON.stringify(obj);
               // var fs = require('fs');
               // fs.writeFile('baby.json', json, 'utf8',true);

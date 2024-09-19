@@ -1,12 +1,16 @@
 import React from 'react'
-import MagnifierImg from '../../../(components)/magnifier'
+import MagnifierImg from '@/app/[locale]/(components)/magnifier'
 import db_woman from "@/../../public/oldproject/woman.json";
 import { Box, Chip, Divider, Fab, Rating, Typography } from '@mui/material';
-import SelectCity from '../../../(components)/SelectCity';
+import SelectCity from '@/app/[locale]/(components)/SelectCity';
 import { usePathname } from 'next/navigation'
+import ImgSlider from '@/app/[locale]/(components)/(imgSlider)/ImgSlider.jsx';
 
 
 import { notFound } from 'next/navigation';
+import Usebanner from '@/app/[locale]/(components)/slide/usebanner';
+import DescriptionProduct from '@/app/[locale]/(components)/(DescriptionProduct)/DescriptionProduct';
+import CarouselProduct from '@/app/[locale]/(components)/(anotherProduct)/CarouselProduct';
 
 interface ShowProductDataType {
   params: {
@@ -126,6 +130,22 @@ export default function page(props: ShowProductDataType) {
     // else if (e.id != props.params.id) return notFound()
   }
   )
-  return x
+  return (
+    <>
+      <div className=' flex justify-center max-lg:grid max-lg:grid-cols-1 my-4 mb-10'>
+        {/* photos show */}
+        <div className=' h-[800px] max-lg:h-[500px]'>
+          <ImgSlider />
+        </div>
+        {/* descriptions show */}
+        <div className=' bg-[rgb(247,247,247)] p-6 border-2  w-2/4 min-h-40 max-h-[800px] max-lg:w-auto'>
+          <DescriptionProduct />
+        </div>
+      </div>
+
+      <CarouselProduct />
+    </>
+
+  )
 }
 

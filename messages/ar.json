@@ -14,7 +14,7 @@
     "home": "hdomi",
     "menu": "القائمة",
     "signIn": "تسجيل الدخول",
-    "ShoppingCar": "سلة التسوق"
+    "ShoppingCar": "عربة التسوق"
   },
   "catogry": {
     "Mens": "ملابس رجال",
@@ -41,20 +41,23 @@
   },
   "SignUp": {
     "dir": "rtl",
-    "signup":"تسجيل الدخول",
-    "description-signUp":"ssssssss",
-    "Login":" تسجيل مستخدم جديد",   
-    "description-Login":"sssssssss",
+    "signup": "تسجيل الدخول",
+    "description-signUp": "ssssssss",
+    "Login": " تسجيل مستخدم جديد",
+    "description-Login": "sssssssss",
     "join": "انضم إلينا عبر حساب جوجل",
     "signUp-google": "تسجيل الدخول عن طريق جوجل",
-    "signUp-email":"    او عن طريق الايميل",
+    "signUp-email": "    او عن طريق الايميل",
     "email": "البريد الإلكتروني",
     "password": "الرقم السري",
-    "have-account":"لديك حساب بالفعل",
-    "Login-here":"الدخول مباشرة",
-    "username":"اسم المستخدم",
-    "firstName":"الأسم الأول",
-    "lastName":"الأسم الأخير"
-    
+    "have-account": "لديك حساب بالفعل",
+    "Login-here": "الدخول مباشرة",
+    "username": "اسم المستخدم",
+    "firstName": "الأسم الأول",
+    "lastName": "الأسم الأخير"
+  },
+  "filters":{
+"price":"السعر"
+
   }
 }

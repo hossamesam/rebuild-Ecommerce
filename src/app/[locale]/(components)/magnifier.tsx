@@ -5,7 +5,7 @@ import { Box, CardMedia } from "@mui/material";
 
 export default function MagnifierImg({ sampleImg }: { sampleImg: any }) {
     // Constants for magnifier size and zoom level
-    const MAGNIFIER_SIZE = 180;
+    const MAGNIFIER_SIZE = 200;
     const ZOOM_LEVEL = 3;
 
     // magnifierImg componenta
@@ -16,10 +16,10 @@ export default function MagnifierImg({ sampleImg }: { sampleImg: any }) {
         height: "100%",
     });
     const [position, setPosition] = useState({
-        x: 100,
-        y: 100,
-        mouseX: 0,
-        mouseY: 0,
+        x: 1000,
+        y: 1000,
+        mouseX: 100,
+        mouseY: 100,
     });
 
     // Event handlers
@@ -51,23 +51,18 @@ export default function MagnifierImg({ sampleImg }: { sampleImg: any }) {
             mouseY: y - MAGNIFIER_SIZE / 2,
         });
     };
-
+    // https://m.media-amazon.com/images/I/61eLvunkWML._AC_SX569_.jpg
     // Render method
     return (
-        <Box>
+        <Box className="flex min-h-[500px]  max-h-[800px] max-xl:max-h-[800px] max-lg:max-h-[500px] max-lg:w-full w-[600px]    justify-center items-center ">
             <div
                 onMouseLeave={handleMouseLeave}
                 onMouseEnter={handleMouseEnter}
                 onMouseMove={handleMouseMove}
-                style={{
-                    width: "40vw",
-                    height: "auto",
-                    position: "relative",
-                    overflow: "hidden",
-                }}
+                className="bg-[rgba(0,0,0,0.03)] relative flex justify-center items-center  overflow-hidden  "
             >
                 <CardMedia
-                    className="object-cover border z-10"
+                    className="max-h-[800px] max-xl:max-h-[800px] max-lg:max-h-[500px] p-1 max-lg:max-w-full flex justify-center items-center object-contain  z-10 "
                     alt=""
                     component="img"
                     image={sampleImg}
@@ -76,16 +71,15 @@ export default function MagnifierImg({ sampleImg }: { sampleImg: any }) {
                     style={{
                         backgroundPosition: `${position.x}px ${position.y}px`,
                         backgroundImage: `url(${sampleImg})`,
-                        backgroundSize: `${imageSize.width * ZOOM_LEVEL}px ${imageSize.height * ZOOM_LEVEL
-                            }px`,
+                        backgroundSize: `${imageSize.width * ZOOM_LEVEL}px ${imageSize.height * ZOOM_LEVEL}px`,
                         backgroundRepeat: "no-repeat",
                         display: zoomable ? "block" : "none",
                         top: `${position.mouseY}px`,
                         left: `${position.mouseX}px`,
                         width: `${MAGNIFIER_SIZE}px`,
-                        height: `${MAGNIFIER_SIZE}px`,
+                        height: `${MAGNIFIER_SIZE / 1.2}px`,
                     }}
-                    className={`object-cover z-50 border-4 rounded-full pointer-events-none absolute border-gray-500`}
+                    className={`flex  max-md:!hidden justify-contain  object-cover z-50 border-4 border-transparent rounded-sm cursor-zoom-in  absolute `}
                 />
             </div>
         </Box>

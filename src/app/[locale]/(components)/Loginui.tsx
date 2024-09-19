@@ -131,7 +131,7 @@ export default function Loginui(props: signIn) {
                   }}
                   type="submit"
                   title="escap"
-                  className="absolute right-3 top-3"
+                  className="absolute right-3 top-3 "
                 >
                   <X />
                   <span className="sr-only">escap main menu</span>
@@ -256,7 +256,7 @@ export default function Loginui(props: signIn) {
             onMouseEnter={() => {
               setopen(!open);
             }}
-            className="flex items-center justify-center flex-row gap-2 max-sm:h-10 max-sm:w-10 max-sm:bg-slate-500 max-sm:rounded-full max-sm:hover:bg-slate-600 hover:scale-105 hover:border-[1px] rounded p-1 focus:border-[1px]"
+            className="flex  items-center justify-center flex-row gap-2 max-sm:h-10 max-sm:w-10 max-sm:bg-slate-500 max-sm:rounded-full max-sm:hover:bg-slate-600 hover:scale-105 hover:border-[1px] rounded p-1 focus:border-[1px]"
           >
             <svg
               width="28"
@@ -283,12 +283,12 @@ export default function Loginui(props: signIn) {
                 onMouseLeave={() => {
                   setopen(false);
                 }}
-                className="absolute left-1/2 z-50 mt-5 flex w-screen max-w-max -translate-x-1/2 px-4 transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
+                className="absolute  left-1/2 z-50 mt-5 flex w-screen max-w-max -translate-x-1/2 px-4 transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
               >
-                <div className="absolute -top-5 left-10 bg-transparent h-5 w-[400px] ">
+                <div className="absolute   -top-5 left-10 bg-transparent h-5 w-[400px] ">
                   <div className="triangle-up absolute inset-x-1/2 border-x-8 border-b-8 border-t-0 border-solid border-zinc-900"></div>
                 </div>
-                <div className="w-screen bg-neutral-100 max-w-md flex-auto overflow-hidden rounded-3xl  text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
+                <div className="w-screen  bg-neutral-100 max-w-md flex-auto overflow-hidden rounded-3xl  text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
                   <div className="p-4  z-50">
                     {solutions.map((item) => (
                       <>
@@ -298,7 +298,7 @@ export default function Loginui(props: signIn) {
                               dispatch(signNow());
                             }}
                             key={item.name}
-                            className="group relative flex w-full gap-x-6 rounded-lg p-4 hover:bg-sky-300 "
+                            className="group cursor-pointer relative flex w-full gap-x-6 rounded-lg p-4 hover:bg-sky-300 "
                           >
                             <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                               <item.icon

@@ -11,21 +11,18 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb:0, 0, 0;
-    --background-start-rgb: 255, 255, 255;
-    --background-end-rgb: 255, 255, 255;
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 239, 239, 239;
+    --background-end-rgb: 239, 239, 239;
 
   }
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
+  background: linear-gradient(to bottom,
       transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
 @layer utilities {
@@ -33,10 +30,11 @@ body {
     text-wrap: balance;
   }
 }
+
 .triangle-up {
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-left: 20px solid transparent;
-  border-right: 20px solid transparent; 
+  border-right: 20px solid transparent;
   border-bottom: 20px solid rgb(255, 251, 251);
 }

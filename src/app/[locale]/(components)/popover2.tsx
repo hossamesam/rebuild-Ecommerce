@@ -34,7 +34,7 @@ function Popover2(props: nav) {
                     <Image className="h-full w-full  object-cover object-right-top rounded-lg " src={man_catogrey} alt={'man_catogrey'} />
                     <div className="absolute max-sm:text-xs   flex w-full h-1/5 bottom-0 items-center justify-center text-white bg-black font-sans font-bold">{props.mens}</div>
                 </Link>
-                <Link href={{ pathname: "/woman_store" }} onClick={openPop} className='relative  h-96 w-full  object-cover rounded-lg  hover:scale-105 hover:grayscale-[50%]' >
+                <Link href={{ pathname: "/woman_store/page/1" }} onClick={openPop} className='relative  h-96 w-full  object-cover rounded-lg  hover:scale-105 hover:grayscale-[50%]' >
                     <Image className='h-full w-full  object-left-bottom    rounded-lg ' src={women_catogrey} alt={'women_catogrey'} />
                     <div className='absolute max-sm:text-xs flex w-full  h-1/5 items-center bottom-0 justify-center text-white bg-black font-sans font-bold'>{props.women}</div>
                 </Link>
