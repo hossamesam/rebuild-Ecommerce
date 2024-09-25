@@ -46,11 +46,13 @@ function Coloress() {
     "#a5f3fc", "#22d3ee", "#0891b2", "#155e75",
     "#e9d5ff", "#c084fc", "#9333ea", "#6b21a8",
   ]
+  // axios.get(`${baseUrl}/api/colors`).then((colur) => {
 
+  // })
   return (
     <form action="" className='grid xl:grid-rows-4 sm:grid-rows-4 grid-rows-4 grid-flow-col gap-2 bg-white border-2 border-gray-500 border-dashed p-2'>
       {colorsHex.map((colur, index) =>
-        <div key={index} className="flex flex-row gap-3">
+        <div  key={index} className="flex flex-row gap-3">
           <label className="relative flex items-center text-gray-400  cursor-pointer" htmlFor="customStyle">
             <input type="checkbox"
               onChange={(e) => {
@@ -86,7 +88,7 @@ function Coloress() {
                 stroke="currentColor" strokeWidth="1">
                 <path fillRule="evenodd" stroke="#e7e5e4"
                   d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                  clip-rule="evenodd"></path>
+                  clipRule="evenodd"></path>
               </svg>
             </span>
           </label>
@@ -272,7 +274,7 @@ export default function Createpage({ dir, mens, women, baby, shoes, ProductType,
             <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-64 border-2 border-black border-dashed rounded-lg cursor-pointer dark:bg-gray-700 hover:bg-gray-300 bg-gray-200   dark:hover:border-gray-500 dark:hover:bg-gray-600 dark:border-gray-500 ">
               <div className="flex flex-col items-center justify-center pt-5 pb-6">
                 <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                 </svg>
                 <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span></p>
                 <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
@@ -285,7 +287,7 @@ export default function Createpage({ dir, mens, women, baby, shoes, ProductType,
 
                   axios.post(`${baseUrl}/api/attachments`, formData, {
                     "headers": {
-                      "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNjc3NDUzNywiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzI2Njg4MTM3fQ.lhzgf8kKUaJsRi5H_wmNk4_OvrvruNUosvWb6tA2yrgYksFedzLj5TO7pmzTMz6FTFAuAPbdOMXr-jYLddeaRA",
+                      "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNjkyMzE3MCwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzI2ODM2NzcwfQ.arebDhsLYdsN3ySRM3X0ojHwI0tUwgn1NJK0skKW8T1_5FrPJX0ahVrhHt2NXxv9Z475QzP3hsfRrEvTiZ9v3w",
                       'Content-Type': `multipart/form-data `,
                     }
                   })
@@ -330,8 +332,7 @@ export default function Createpage({ dir, mens, women, baby, shoes, ProductType,
               axios.post(`${baseUrl}/api/items`, obj,
                 {
                   'headers': {
-                    'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNjc3NDUzNywiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzI2Njg4MTM3fQ.lhzgf8kKUaJsRi5H_wmNk4_OvrvruNUosvWb6tA2yrgYksFedzLj5TO7pmzTMz6FTFAuAPbdOMXr-jYLddeaRA'
-
+                    'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNjkyMzE3MCwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzI2ODM2NzcwfQ.arebDhsLYdsN3ySRM3X0ojHwI0tUwgn1NJK0skKW8T1_5FrPJX0ahVrhHt2NXxv9Z475QzP3hsfRrEvTiZ9v3w'
                   }
                 })
                 .then((request) => {

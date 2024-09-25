@@ -62,7 +62,7 @@ function ImgSlider() {
             <div className={" flex gap-2 w-full pr-2 justify-center"}>
                 <div className='grid grid-cols-1 max-h-24  w-12  pt-12'>
                     {Imgs.map((img, index) => (
-                        <img id={index} className=" AllImg opacity-80 border-2 rounded-lg border-zinc-300  object-contain h-12 w-full cursor-pointer" src={img} onClick={() => setslideIndex(index)} />
+                        <img key={index} id={index} className=" AllImg opacity-80 border-2 rounded-lg border-zinc-300  object-contain h-12 w-full cursor-pointer" src={img} onClick={() => setslideIndex(index)} />
                     ))}
                 </div>
 

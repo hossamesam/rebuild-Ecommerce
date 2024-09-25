@@ -13,7 +13,7 @@ import {
   FingerPrintIcon,
   SquaresPlusIcon,
 } from "@heroicons/react/24/outline";
-import { useEffect, useState } from "react";
+import { createRef, useEffect, useState } from "react";
 import "@/app/[locale]/globals.css";
 import LoginIcon from "@mui/icons-material/Login";
 import { useTranslations } from "next-intl";
@@ -25,8 +25,8 @@ import axios from "axios";
 import { baseUrl } from "@/baseUrl";
 import { useDispatch, useSelector } from "react-redux";
 import { signNow } from "@/Redux/HeaderSlice";
-import Recaptcha from "./Recaptcha";
 import ReCAPTCHA from "react-google-recaptcha";
+import LoginIntreface from "../(LoginIntreface)/LoginIntreface";
 
 export type signIn = {
   signIn: string;
@@ -37,7 +37,11 @@ export type signIn = {
   locale: string;
 };
 
+
+
 export default function Loginui(props: signIn) {
+  const recaptchaRef = createRef<String>();
+
   const RecaptchaData: any = useSelector<any>((state) => state.storeSlice);
   const state: any = useSelector<any>((state) => state.HeaderSlice);
   const dispatch = useDispatch();
@@ -64,27 +68,28 @@ export default function Loginui(props: signIn) {
     username,
     password,
     rememberMe,
-
   }: FormData) {
     const users = { username, password, rememberMe };
     // recaptchaValue:
     // Replace this with a server action or fetch an API endpoint to authenticate
-    axios
-      .post(`${baseUrl}/api/authenticate`, users, {
+    useEffect(() => {
+      axios.post(`${baseUrl}/api/authenticate`, users, {
         headers: {
           "Content-Type": "application/json;charset=UTF-8",
-          "re-captcha-token": recaptchaValue
+          "re-captcha-token": recaptchaRef.current.getValue()
           //  RecaptchaData.RecaptchaValue,
         },
       })
-      .then((e) => console.log(e.data));
+        .then((e) => console.log(e.data));
+    }, [])
+
   }
 
   const solutions = [
     {
       name: props.Login,
       description: props.descriptionLogin,
-      href: `/${props.locale}/logIn`,
+      href: `/${props.locale}/register`,
       icon: LoginIcon,
     },
     {
@@ -98,21 +103,16 @@ export default function Loginui(props: signIn) {
   const callsToAction = [
     {
       name: "Watch demo",
-      href: `/${props.locale}/logIn`,
+      href: `/${props.locale}/register`,
       icon: PlayCircleIcon,
     },
     { name: "Contact sales", href: "#", icon: PhoneIcon },
   ];
 
-
-
-  const [open, setopen] = useState(false);
-
-  const SigninUI = () => {
+  function SigninUI() {
     return (
       <>
-        {state.signnow && setopen(false)}
-        {state.signnow && (
+        {state.signnow && setopen(false) || (
           <>
             <button
               onClick={() => {
@@ -214,10 +214,12 @@ export default function Loginui(props: signIn) {
                     </div>
                     <ReCAPTCHA
                       sitekey="6Les2igqAAAAAPMpPY1NFm7zKIH2X27k0rFKtnc0"
-                      onChange={(value: any) => setrecaptchaValue(value)}
-
+                      ref={recaptchaRef}
+                      onChange={(value: any) => {
+                        setrecaptchaValue(value)
+                        console.log(value)
+                      }}
                     />
-                    {/* <Recaptcha /> */}
                     <button
                       onClick={() => handleSubmit(onSubmit)}
                       disabled={isSubmitting}
@@ -229,7 +231,7 @@ export default function Loginui(props: signIn) {
                     <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                       Don’t have an account yet?{" "}
                       <Link
-                        href="/logIn"
+                        href="/register"
                         onClick={() => {
                           dispatch(signNow());
                         }}
@@ -247,33 +249,49 @@ export default function Loginui(props: signIn) {
       </>
     );
   };
+  const StartReCAPTCH = () => {
+    return (
+      <>
+        <ReCAPTCHA
+          sitekey="6Les2igqAAAAAPMpPY1NFm7zKIH2X27k0rFKtnc0"
+          ref={recaptchaRef}
+          onChange={(value: any) => {
+            setrecaptchaValue(value)
+            console.log(value)
+          }}
+        />
+      </>
+    )
+  }
+
+
+  const [open, setopen] = useState(false);
+
 
   return (
     <>
       <div className="relative">
-        <Link href={"/logIn"}>
-          <button
-            onMouseEnter={() => {
-              setopen(!open);
-            }}
-            className="flex  items-center justify-center flex-row gap-2 max-sm:h-10 max-sm:w-10 max-sm:bg-slate-500 max-sm:rounded-full max-sm:hover:bg-slate-600 hover:scale-105 hover:border-[1px] rounded p-1 focus:border-[1px]"
+        <Link href={"/register"}
+          onMouseEnter={() => {
+            setopen(!open);
+          }}
+          className="flex  items-center justify-center flex-row gap-2 max-sm:h-10 max-sm:w-10 max-sm:bg-slate-500 max-sm:rounded-full max-sm:hover:bg-slate-600 hover:scale-105 hover:border-[1px] rounded p-1 focus:border-[1px]"
+        >
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 27 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <svg
-              width="28"
-              height="28"
-              viewBox="0 0 27 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M13.2918 3C15.1194 3 16.6147 4.35 16.6147 6C16.6147 7.65 15.1194 9 13.2918 9C11.4642 9 9.96884 7.65 9.96884 6C9.96884 4.35 11.4642 3 13.2918 3ZM13.2918 18C17.7778 18 22.9283 19.935 23.2606 21H3.32295C3.70508 19.92 8.82242 18 13.2918 18ZM13.2918 0C9.61993 0 6.64589 2.685 6.64589 6C6.64589 9.315 9.61993 12 13.2918 12C16.9636 12 19.9377 9.315 19.9377 6C19.9377 2.685 16.9636 0 13.2918 0ZM13.2918 15C8.85565 15 0 17.01 0 21V24H26.5836V21C26.5836 17.01 17.7279 15 13.2918 15Z"
-                fill="#F8F8F8"
-              />
-            </svg>
-            <div className="text-2xl max-sm:hidden sm:whitespace-nowrap  sm:text-[20px] font-bold text-white font-['Roboto'] ">
-              <a href="ar/logIn">{props.signIn}</a>
-            </div>
-          </button>
+            <path
+              d="M13.2918 3C15.1194 3 16.6147 4.35 16.6147 6C16.6147 7.65 15.1194 9 13.2918 9C11.4642 9 9.96884 7.65 9.96884 6C9.96884 4.35 11.4642 3 13.2918 3ZM13.2918 18C17.7778 18 22.9283 19.935 23.2606 21H3.32295C3.70508 19.92 8.82242 18 13.2918 18ZM13.2918 0C9.61993 0 6.64589 2.685 6.64589 6C6.64589 9.315 9.61993 12 13.2918 12C16.9636 12 19.9377 9.315 19.9377 6C19.9377 2.685 16.9636 0 13.2918 0ZM13.2918 15C8.85565 15 0 17.01 0 21V24H26.5836V21C26.5836 17.01 17.7279 15 13.2918 15Z"
+              fill="#F8F8F8"
+            />
+          </svg>
+          <div className="text-2xl max-sm:hidden sm:whitespace-nowrap  sm:text-[20px] font-bold text-white font-['Roboto'] ">
+            <div>{props.signIn}</div>
+          </div>
         </Link>
 
         <div>
@@ -290,8 +308,8 @@ export default function Loginui(props: signIn) {
                 </div>
                 <div className="w-screen  bg-neutral-100 max-w-md flex-auto overflow-hidden rounded-3xl  text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
                   <div className="p-4  z-50">
-                    {solutions.map((item) => (
-                      <>
+                    {solutions.map((item, index) => (
+                      <div key={item.name}>
                         {item.btn ? (
                           <div
                             onClick={() => {
@@ -322,20 +340,21 @@ export default function Loginui(props: signIn) {
                                 className="h-6 w-6 text-zinc-950 group-hover:text-zinc-950"
                               />
                             </div>
-                            <a
-                              href={item.href}
+                            <div
+
                               className="font-semibold flex self-center text-xl justify-self-center text-gray-900"
                             >
                               {item.name}
-                            </a>
+                            </div>
                           </a>
                         )}
-                      </>
+                      </div>
                     ))}
                   </div>
                   <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
-                    {callsToAction.map((item) => (
+                    {callsToAction.map((item, index) => (
                       <a
+                        id={`${item.name}`}
                         key={item.name}
                         href={item.href}
                         className="flex items-center justify-center gap-x-2.5 p-3 font-semibold text-gray-900 hover:bg-gray-100"
@@ -357,7 +376,8 @@ export default function Loginui(props: signIn) {
           )}
         </div>
       </div>
-      {state.signnow && <SigninUI />}
+
+      {state.signnow && <LoginIntreface />}
     </>
   );
 }

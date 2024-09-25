@@ -42,9 +42,7 @@
   "SignUp": {
     "dir": "rtl",
     "signup": "تسجيل الدخول",
-    "description-signUp": "ssssssss",
     "Login": " تسجيل مستخدم جديد",
-    "description-Login": "sssssssss",
     "join": "انضم إلينا عبر حساب جوجل",
     "signUp-google": "تسجيل الدخول عن طريق جوجل",
     "signUp-email": "    او عن طريق الايميل",
@@ -56,8 +54,7 @@
     "firstName": "الأسم الأول",
     "lastName": "الأسم الأخير"
   },
-  "filters":{
-"price":"السعر"
-
+  "filters": {
+    "price": "السعر"
   }
 }

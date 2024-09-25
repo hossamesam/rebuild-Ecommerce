@@ -42,16 +42,7 @@ function DescriptionProduct() {
                         >
 
                             <div
-                                data-buying-option-index={0}
-                                data-csa-c-element-type="navigational"
-                                data-csa-c-posx={0}
-                                data-csa-c-type="uxElement"
-                                data-icon-content="icon-container-d61be134-c501-4ac2-bdd6-d57029a77ef3"
-                                data-name="CASH_ON_DELIVERY_MENA"
-                                data-type="custom-pop-over"
-                                id="CASH_ON_DELIVERY_MENA"
                                 className="a-column a-span12 a-text-center icon-container scrollable-container celwidget a-declarative"
-                                data-csa-c-id="aa7dxk-k77bsf-hotjmr-ljjomv"
                             >
 
                                 <div

@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const storeSlice = createSlice({
   name: "storeSlice",
   initialState: {
-    RecaptchaValue: "oldddddddddddddddddddddddddd",
+    RecaptchaValue: "null",
   },
   reducers: {
     RecaptchaAction: (state, action) => {

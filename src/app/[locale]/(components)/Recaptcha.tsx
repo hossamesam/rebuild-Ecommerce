@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useDispatch, useSelector } from "react-redux";
 
-function Recaptcha() {
+function Recaptcha(sitekey:String) {
   const [DataOfRecaptchan, setDataOfRecaptchan] = useState(String());
 
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ function Recaptcha() {
   return (
     <>
       <ReCAPTCHA
-        sitekey="6Les2igqAAAAAPMpPY1NFm7zKIH2X27k0rFKtnc0"
+        sitekey={"6Les2igqAAAAAPMpPY1NFm7zKIH2X27k0rFKtnc0"}
         onChange={onChange}
       />
 

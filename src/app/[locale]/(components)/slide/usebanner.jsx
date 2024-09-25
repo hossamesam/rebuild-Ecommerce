@@ -21,12 +21,11 @@ const images = [
 const Usebanner = () => {
   const pathname = usePathname();
   const path = pathname.split("/").slice(2).join("/");
-  console.log("path: ", path);
   return (
     <>
       {path == "" &&
         <Box className={" bg-black"}>
-          <Slider imageList={images} width="100%" height={"400px"} />
+          <Slider imageList={images} width="100%" height={"700px"} />
         </Box>}
 
     </>

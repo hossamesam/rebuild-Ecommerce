@@ -14,6 +14,8 @@ import { useLocale, useNow, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import ShopSlide from "./ShopSlide";
 import woman from "@/../../public/oldproject/woman.json";
+import axios from "axios";
+import { baseUrl } from "@/baseUrl";
 
 export interface nav {
   menu: string;
@@ -51,26 +53,42 @@ export default function Header(props: nav) {
   const path = pathname.split("/").slice(2).join("/");
   useEffect(() => {
     router.push(`/${props.local}/${path}`);
-    console.log("local: " + props.local);
-    console.log("path :" + pathname.split("/").slice(2));
   }, [])
+
+  //   const [dataOfItemCart, setDataOfItemCart] = useState()
+
+  //   useEffect(() => {
+  //     return
+  //     (
+  // {    JSON.parse(localStorage.getItem("item"))?.map((items: { id: Number, count: Number }) => {
+  //       axios.get(`${baseUrl}/api/items/${items.id}`)
+  //         .then((item) => {
+  //           console.log(item.data)
+  //         })
+  //         .catch((err) => console.log(err))}
+  // )
+  //     })
+  //   }, [])
+
+
+
 
 
   return (
+
     <div>
       <header className="h-24 max-sm:h-12 bg-slate-700 flex flex-row items-center justify-between dark:bg-red-500">
 
-        <nav id="logo">
-          <a href="/" className="w-48 text-white font-bold pr-5 text-2xl">
-            {/* <Image
+        <a id="logo" href="/" className="w-48 text-white font-bold pr-5 text-2xl">
+          {/* <Image
               className="max-sm:w-24 max-sm:h-12 w-full  h-24  object-fill flex   "
               src={logo}
               alt="logo"
             /> */}
-            ecommerce
-          </a>
-        </nav>
-        <div
+          ecommerce
+        </a>
+
+        <search
           id="search"
           className="flex max-sm:hidden  justify-center items-center pt-2  grow  relative mx-auto text-gray-600"
         >
@@ -100,9 +118,9 @@ export default function Header(props: nav) {
               </svg>
             </button>
           </div>
-        </div>
+        </search>
 
-        <nav
+        <div
           id="log-in_And_buy"
           className=" flex flex-row items-center justify-center   ml-4 mt-2 gap-2"
         >
@@ -175,7 +193,7 @@ export default function Header(props: nav) {
               <AlignJustify color="white" />
             </button>
           </div>
-        </nav>
+        </div>
         {/* ........................................ menu .............................................. */}
         <div
           className={
@@ -233,11 +251,11 @@ export default function Header(props: nav) {
                   viewBox="0 0 400 512"
                   xmlSpace="preserve"
                 >
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                   <g
                     id="SVGRepo_tracerCarrier"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   ></g>
                   <g id="SVGRepo_iconCarrier">
 
@@ -303,11 +321,11 @@ export default function Header(props: nav) {
                   height="38px"
                   viewBox="0 0 400 600"
                 >
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                   <g
                     id="SVGRepo_tracerCarrier"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   ></g>
                   <g id="SVGRepo_iconCarrier">
 
@@ -349,11 +367,11 @@ export default function Header(props: nav) {
                   xmlSpace="preserve"
                   fill="#000000"
                 >
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                   <g
                     id="SVGRepo_tracerCarrier"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   ></g>
                   <g id="SVGRepo_iconCarrier">
 
@@ -431,18 +449,11 @@ export default function Header(props: nav) {
                 <div>
                   {MyBasket}
                   {
-                    woman.map((e) => {
-                      return <>
-                        <div></div>
-                        <div>{e.id}</div>
-                      </>
-                    })
-                    // Array(JSON.parse(localStorage.getItem("item")))?.map((item) => {
-                    //   return <>
-                    //     {item}
-                    //   </>
+                    // woman.map((e, index) => {
+                    //   return <div key={index}>
+                    //     <div>{e.id}</div>
+                    //   </div>
                     // })
-
                     // woman.map((e) => {
                     // // JSON.parse(localStorage.getItem("item")).map((item:any) => { item.id == e.id && <img src={e.imageSrc}></img> })
                     // // return <>q</>
@@ -493,5 +504,6 @@ export default function Header(props: nav) {
       </div>
 
     </div>
+
   );
 }

@@ -2,7 +2,6 @@ import { useTranslations } from "next-intl";
 import React from "react";
 import { FormEvent } from "react";
 import LoginTransleate from "./loginTransleate";
-import Recaptcha from "../(components)/Recaptcha";
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -33,7 +32,6 @@ export default function logintrans({
         lastName={t("lastName")}
         langKey={locale}
       />
-      {/* <Recaptcha /> */}
     </>
   );
 }

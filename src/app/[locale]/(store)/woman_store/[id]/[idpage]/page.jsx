@@ -16,17 +16,13 @@ export default function page() {
     const router = usePathname();
     const [data, setData] = useState([]);
     const [PaginationNum, setPaginationUi] = useState(1);
-    const sizeItems = 3
+    const sizeItems = 15
 
     usePathname()
     useEffect(() => {
 
         axios.get(`${baseUrl}/api/items?page=${params.idpage - 1}&size=${sizeItems}`).then((res) => {
             setData(res.data)
-            console.log("res.data:");
-            console.log(res.headers.get("x-total-count"));
-            console.log("routers");
-            console.log(params);
             setPaginationUi(Math.ceil(res.headers.get("x-total-count") / sizeItems));
         })
             .catch((err) => console.log(err))

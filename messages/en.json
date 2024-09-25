@@ -13,7 +13,7 @@
   "Navigation": {
     "home": "hdomi",
     "menu": "menu",
-    "signIn": "sign up",
+    "signIn": "sign",
     "ShoppingCar": "cart"
   },
   "catogry": {
@@ -41,10 +41,8 @@
   },
   "SignUp": {
     "dir": "ltr",
-    "signup": "Sign Up",
-    "description-signUp": "sssssss",
-    "Login": "log-in",
-    "description-Login": "ssssssss",
+    "signup": "sign in",
+    "Login": "create new account",
     "join": "Join us via Google account",
     "signUp-google": "Sign Up with Google",
     "signUp-email": "or with email",

@@ -8,6 +8,7 @@ import axios from 'axios';
 import { baseUrl } from '@/baseUrl';
 import { useDispatch } from 'react-redux';
 import { signNow } from '@/Redux/HeaderSlice';
+import GoogleOAuth from '../(components)/GoogleOAuth/GoogleOAuth';
 
 type trans = {
   dir: string,
@@ -27,6 +28,8 @@ type trans = {
 
 export default function LoginTransleate(props: trans) {
   const dispatch = useDispatch()
+  const Router = useRouter()
+
   const signupSchema = z.object({
     email: z.string().min(1, { message: "required" }).email({ message: 'not vaild email' }),
     login: z.string().min(1, { message: "username must be at least 2 characters" }),
@@ -59,56 +62,22 @@ export default function LoginTransleate(props: trans) {
     console.log("data:");
     console.log(users);
 
-    // Replace this with a server action or fetch an API endpoint to authenticate
-    axios.post(`${baseUrl}//api/register`, users,
+    axios.post(`${baseUrl}/api/register`, users,
       {
         'headers': {
           'Content-Type': 'application/json;charset=UTF-8'
         }
       }
     )
-
-    // await new Promise<void>((resolve) => {
-    //   setTimeout(() => {
-    //     resolve();
-    //   }, 2000); // 2 seconds in milliseconds
-    // });
-    window.open(`key`)
+      .then(() => Router.replace("/"))
+      .catch((err) => console.log(err))
   }
 
-  const onSubmits = ({ email, firstName, lastName, login, password }: FormData) => {
-    const user = {
-      email: email,
-      firstName: firstName,
-      langKey: langKey,
-      lastName: lastName,
-      login: login,
-      password: password
-    }
-    console.log("user is");
-    console.log(user);
-  }
-
-  // const handleSubmited = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   setregisters({
-  //     "firstName": String(data.get('firstName')),
-  //     "lastName": String(data.get('lastName')),
-  //     "email": String(data.get('email')),
-  //     "password": String(data.get('password')),
-  //     "login": String(data.get('login')),
-  //     "langKey": String(props.langKey),
-  //   })
-  //   console.log("handleSubmited: " + data);
-  //   console.log(data);
-
-  // };
 
   return (
-    <div className=' '>
+    <div className=''>
       {/* <!-- component --> */}
-      <div className="flex h-screen  " dir='ltr'>
+      <div className="flex   " dir='ltr'>
         {/* <!-- Left Pane --> */}
         <div className="hidden lg:flex items-center justify-center flex-1 bg-white text-black">
           <div className="max-w-md text-center">
@@ -188,7 +157,7 @@ export default function LoginTransleate(props: trans) {
             <h1 className="text-3xl font-semibold mb-6 text-black text-center">{props.signUp}</h1>
             <h1 className="text-md font-semibold mb-6 text-black text-center">{props.join} </h1>
             <div className="mt-4 flex flex-col lg:flex-row items-center justify-between">
-              <div className="w-full lg:w-1/1 mb-2 lg:mb-0">
+              {/*googleOuth <div className="w-full lg:w-1/1 mb-2 lg:mb-0">
                 <button type="button" className="w-full flex justify-center items-center gap-2 bg-white text-sm text-gray-600 p-2 rounded-md hover:bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-colors duration-300">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-4" id="google">
                     <path fill="#fbbb00" d="M113.47 309.408 95.648 375.94l-65.139 1.378C11.042 341.211 0 299.9 0 256c0-42.451 10.324-82.483 28.624-117.732h.014L86.63 148.9l25.404 57.644c-5.317 15.501-8.215 32.141-8.215 49.456.002 18.792 3.406 36.797 9.651 53.408z"></path>
@@ -198,8 +167,10 @@ export default function LoginTransleate(props: trans) {
                   </svg>
                   {props.signUpGoogle}
                 </button>
+              </div> */}
+              <div className="w-full lg:w-1/1 mb-2 lg:mb-0">
+                <GoogleOAuth />
               </div>
-
             </div>
             <div className="mt-4 text-md font-semibold text-black text-center">
               <p>{props.signUpEmail}</p>
@@ -273,7 +244,7 @@ export default function LoginTransleate(props: trans) {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 

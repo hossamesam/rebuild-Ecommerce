@@ -28,7 +28,7 @@ function Popover(props: nav) {
 
   return (
     <div>
-{path !== "logIn" && 
+      {path !== "register" &&
       <button onClick={openPop} className=' flex justify-center items-center gap-2 w-full h-12 bg-gray-500'>
         <span className=' font-sans font-bold text-2xl text-white '>{props.menu}</span>
         <CircleChevronRight className={rot + ' text-white size-8'} strokeWidth={3} />

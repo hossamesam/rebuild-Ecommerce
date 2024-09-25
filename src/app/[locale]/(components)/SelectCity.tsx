@@ -111,8 +111,9 @@ export default function SelectCity() {
           input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
+          {names.map((name,index) => (
             <MenuItem
+              id={`${index}`}
               key={name}
               value={name}
               style={getStyles(name, personName, theme)}
