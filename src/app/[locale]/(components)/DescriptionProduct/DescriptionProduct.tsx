@@ -1,17 +1,22 @@
+"use client"
+import { MyShopingData } from '@/types/app'
 import { Box, Divider, Rating, Typography } from '@mui/material'
 import React from 'react'
 
-function DescriptionProduct() {
+function DescriptionProduct({ Data, Locale }: { Data: MyShopingData, Locale: any }) {
+
     return (
-        <div className='p-2 '>
-            <Typography variant='h5' >LG تلفزيون ذكي UHD UT80 بدقة 4 كيه 55 بوصة بتقنية الذكاء الاصطناعي ماجيك بخاصية HDR 10 webOS24-55UT80006LA (2024)</Typography>
+        <div className='p-2 ' >
+            {/* {Data.id}ssssss */}
+            <Typography variant='h5' >
+                {Locale == "ar" ? Data.nameAr : Data.nameTranslate.en}</Typography>
             <Box className="flex flex-row justify-between relative">
                 <Typography variant='h6' className='text-red-500' >العلامة التجارية: ال جي</Typography>
                 <Rating className='absolute left-0 bottom-1' dir='ltr' name="half-rating-read " defaultValue={2.5} precision={0.5} readOnly />
             </Box>
             <Divider />
             <Box className="grid grid-cols-[1fr_auto] justify-between w-full">
-                <Typography className='py-3 grow' variant='h5' >18,999<sup>00</sup> <sup>جنيه</sup>  </Typography>
+                <Typography className='py-3 grow' variant='h5' >{Data.sellPrice}<sup>00</sup> <sup>جنيه</sup>  </Typography>
                 <Typography className='text-red-500  grow-0' variant='h3'>22%</Typography>
                 <Box className='flex gap-2'>
                     <Typography className='' variant='body1' > السعر قبل:  </Typography>
@@ -20,7 +25,7 @@ function DescriptionProduct() {
             </Box>
             <Box>
                 <Typography variant='h6' content='p' className='text-justify'>
-                    تسجيل الدخول للاستفادة من الكوبون. خصم إضافي 20% مع فودافون كاش. أدخل رمز VFCASH عند إتمام عملية الشراء. خصم من أمازون.
+                    {Locale == "ar" ? Data.description : Data.descriptionTranslate.en}
                 </Typography>
             </Box>
 

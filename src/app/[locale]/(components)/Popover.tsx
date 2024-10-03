@@ -6,7 +6,7 @@ import man_catogrey from '@/../public/image_catogrey/man_catogrey.jpg';
 import shoes_catogrey from '@/../public/image_catogrey/shoes_catogrey.jpg';
 import women_catogrey from '@/../public/image_catogrey/women_catogrey.jpg';
 import Image from 'next/image';
-import type { nav } from '../(components)/header'
+import type { nav } from './Header'
 import { redirect, usePathname, useRouter } from 'next/navigation';
 import { Link } from '@/navigation';
 
@@ -29,10 +29,10 @@ function Popover(props: nav) {
   return (
     <div>
       {path !== "register" &&
-      <button onClick={openPop} className=' flex justify-center items-center gap-2 w-full h-12 bg-gray-500'>
-        <span className=' font-sans font-bold text-2xl text-white '>{props.menu}</span>
-        <CircleChevronRight className={rot + ' text-white size-8'} strokeWidth={3} />
-      </button>}
+        <button onClick={openPop} className=' flex justify-center items-center gap-2 w-full h-12 bg-gray-500'>
+          <span className=' font-sans font-bold text-2xl text-white '>{props.menu}</span>
+          <CircleChevronRight className={rot + ' text-white size-8'} strokeWidth={3} />
+        </button>}
 
 
       <nav className={open + '  z-40 ease-out bg-neutral-100 absolute   grid-cols-4 p-4 items-center max-sm:gap-2  gap-4 '}>

@@ -1,18 +1,7 @@
 "use client";
 import { Link } from "@/navigation";
-import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
-import {
-  ChevronDownIcon,
-  PhoneIcon,
-  PlayCircleIcon,
-} from "@heroicons/react/20/solid";
-import {
-  ArrowPathIcon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
-} from "@heroicons/react/24/outline";
+import { PhoneIcon, PlayCircleIcon, } from "@heroicons/react/20/solid";
+import { CursorArrowRaysIcon, } from "@heroicons/react/24/outline";
 import { createRef, useEffect, useState } from "react";
 import "@/app/[locale]/globals.css";
 import LoginIcon from "@mui/icons-material/Login";
@@ -26,23 +15,15 @@ import { baseUrl } from "@/baseUrl";
 import { useDispatch, useSelector } from "react-redux";
 import { signNow } from "@/Redux/HeaderSlice";
 import ReCAPTCHA from "react-google-recaptcha";
-import LoginIntreface from "../(LoginIntreface)/LoginIntreface";
+import LoginIntreface from "./LoginIntreface/LoginIntreface";
+import { signIn } from "@/types/app";
+import { RegisterIcoHeader } from "../../../../public/svg";
 
-export type signIn = {
-  signIn: string;
-  signup: string;
-  descriptionsignUp: string;
-  Login: string;
-  descriptionLogin: string;
-  locale: string;
-};
 
 
 
 export default function Loginui(props: signIn) {
   const recaptchaRef = createRef<String>();
-
-  const RecaptchaData: any = useSelector<any>((state) => state.storeSlice);
   const state: any = useSelector<any>((state) => state.HeaderSlice);
   const dispatch = useDispatch();
 
@@ -270,26 +251,15 @@ export default function Loginui(props: signIn) {
 
   return (
     <>
-      <div className="relative">
+      <div className=" relative ">
         <Link href={"/register"}
           onMouseEnter={() => {
             setopen(!open);
           }}
-          className="flex  items-center justify-center flex-row gap-2 max-sm:h-10 max-sm:w-10 max-sm:bg-slate-500 max-sm:rounded-full max-sm:hover:bg-slate-600 hover:scale-105 hover:border-[1px] rounded p-1 focus:border-[1px]"
+          className="flex   items-center justify-center flex-row gap-2 max-sm:h-10 max-sm:w-10 max-sm:bg-slate-500 max-sm:rounded-full max-sm:hover:bg-slate-600 hover:scale-105 hover:border-[1px] rounded p-1 focus:border-[1px]"
         >
-          <svg
-            width="28"
-            height="28"
-            viewBox="0 0 27 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M13.2918 3C15.1194 3 16.6147 4.35 16.6147 6C16.6147 7.65 15.1194 9 13.2918 9C11.4642 9 9.96884 7.65 9.96884 6C9.96884 4.35 11.4642 3 13.2918 3ZM13.2918 18C17.7778 18 22.9283 19.935 23.2606 21H3.32295C3.70508 19.92 8.82242 18 13.2918 18ZM13.2918 0C9.61993 0 6.64589 2.685 6.64589 6C6.64589 9.315 9.61993 12 13.2918 12C16.9636 12 19.9377 9.315 19.9377 6C19.9377 2.685 16.9636 0 13.2918 0ZM13.2918 15C8.85565 15 0 17.01 0 21V24H26.5836V21C26.5836 17.01 17.7279 15 13.2918 15Z"
-              fill="#F8F8F8"
-            />
-          </svg>
-          <div className="text-2xl max-sm:hidden sm:whitespace-nowrap  sm:text-[20px] font-bold text-white font-['Roboto'] ">
+          <RegisterIcoHeader />
+          <div className="text-2xl   max-sm:hidden sm:whitespace-nowrap  sm:text-[20px] font-bold text-white font-['Roboto'] ">
             <div>{props.signIn}</div>
           </div>
         </Link>
@@ -301,12 +271,13 @@ export default function Loginui(props: signIn) {
                 onMouseLeave={() => {
                   setopen(false);
                 }}
-                className="absolute  left-1/2 z-50 mt-5 flex w-screen max-w-max -translate-x-1/2 px-4 transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
+                //   rtl:left-[27%] ltr:-right-[260px]
+                className=" z-20  absolute sm:rtl:left-10 sm:ltr:-left-12 mt-5 max-sm:rtl:-left-2 max-sm:ltr:-left-12  flex w-screen max-w-max -translate-x-1/2  transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
               >
                 <div className="absolute   -top-5 left-10 bg-transparent h-5 w-[400px] ">
-                  <div className="triangle-up absolute inset-x-1/2 border-x-8 border-b-8 border-t-0 border-solid border-zinc-900"></div>
+                  <div className="triangle-up  absolute inset-x-1/2 border-x-8 border-b-8 border-t-0 border-solid border-zinc-900"></div>
                 </div>
-                <div className="w-screen  bg-neutral-100 max-w-md flex-auto overflow-hidden rounded-3xl  text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
+                <div className="w-96 bg-slate-100 max-w-md flex-auto overflow-hidden rounded-3xl  text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
                   <div className="p-4  z-50">
                     {solutions.map((item, index) => (
                       <div key={item.name}>
@@ -367,9 +338,6 @@ export default function Loginui(props: signIn) {
                       </a>
                     ))}
                   </div>
-                  {/* <button onClick={() => { dispatch(signNow()) }}>sssssssssssssss</button>
-                  <br></br>
-                  {String(state.signnow)} */}
                 </div>
               </div>
             </>

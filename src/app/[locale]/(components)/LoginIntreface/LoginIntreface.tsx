@@ -1,39 +1,39 @@
 "use client"
 import { signNow } from '@/Redux/HeaderSlice';
 import { baseUrl } from '@/baseUrl';
+import { redirect } from '@/navigation';
+import { FormData, signupSchema } from '@/types/app';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import { X } from 'lucide-react';
+import { useCookies } from 'next-client-cookies';
 import Link from 'next/link';
-import React, { createRef, useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react'
 import ReCAPTCHA from "react-google-recaptcha";
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { z } from 'zod';
+import Cookies from 'universal-cookie';
+
+
 
 function LoginIntreface() {
   const state: any = useSelector<any>((state) => state.HeaderSlice);
   const dispatch = useDispatch()
-  const recaptchaRef = createRef<String>();
   const [Recap, setRecap] = useState<String>()
-  const signupSchema = z.object({
-    username: z.string().max(15, { message: "username must be at least 2 characters" }),
-    rememberMe: z.boolean().default(false),
-    password: z.string(),
-  });
-
-  type FormData = z.infer<typeof signupSchema>;
+  const cookies = new Cookies();
+  const router = useRouter();
 
   const {
     handleSubmit,
     register,
-    formState: { errors, isSubmitting, isDirty, isValid },
+    formState: { errors, isSubmitting },
   } = useForm<FormData>({
     mode: "onChange",
     resolver: zodResolver(signupSchema),
   });
 
-  async function onSubmit({
+  function onSubmit({
     username,
     password,
     rememberMe,
@@ -43,14 +43,18 @@ function LoginIntreface() {
     axios.post(`${baseUrl}/api/authenticate`, users, {
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
-        "re-captcha-token": Recap
+        "re-captcha-token": Recap,
       },
     })
-      .then((e) => console.log(e.data))
+      .then((e) => {
+        console.log(e.data)
+        cookies.set('token', JSON.stringify(e.data))
+        router.push("/")
+
+        // sessionStorage.setItem("token", JSON.stringify(e.data))
+      })
       .catch(err => console.log(err))
   }
-
-
 
 
   return (
@@ -70,7 +74,7 @@ function LoginIntreface() {
               dir="ltr"
               className="absolute inset-0  flex dark:bg-gray-900 items-center justify-center"
             >
-              <div className="relative z-50 w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+              <div className="relative z-50 w-full bg-red-600 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                 <button
                   onClick={() => {
                     dispatch(signNow());
@@ -160,14 +164,12 @@ function LoginIntreface() {
                     </div>
                     <ReCAPTCHA
                       sitekey="6Les2igqAAAAAPMpPY1NFm7zKIH2X27k0rFKtnc0"
-                      // ref={recaptchaRef}
                       onChange={(value: any) => {
                         setRecap(value)
                         console.log(Recap);
 
                       }}
                     />
-                    {/* <Recaptcha /> */}
                     <button
                       onClick={() => handleSubmit(onSubmit)}
                       disabled={isSubmitting}

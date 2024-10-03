@@ -4,13 +4,14 @@ import db_woman from "@/../../public/oldproject/woman.json";
 import { Box, Chip, Divider, Fab, Rating, Typography } from '@mui/material';
 import SelectCity from '@/app/[locale]/(components)/SelectCity';
 import { usePathname } from 'next/navigation'
-import ImgSlider from '@/app/[locale]/(components)/(imgSlider)/ImgSlider.jsx';
-
+import ImgSlider from '@/app/[locale]/(components)/imgSlider/ImgSlider.jsx';
 
 import { notFound } from 'next/navigation';
 import Usebanner from '@/app/[locale]/(components)/slide/usebanner';
-import DescriptionProduct from '@/app/[locale]/(components)/(DescriptionProduct)/DescriptionProduct';
-import CarouselProduct from '@/app/[locale]/(components)/(anotherProduct)/CarouselProduct';
+import DescriptionProduct from '@/app/[locale]/(components)/DescriptionProduct/DescriptionProduct';
+import CarouselProduct from '@/app/[locale]/(components)/anotherProduct/CarouselProduct';
+import axios from 'axios';
+import { baseUrl } from '@/baseUrl';
 
 interface ShowProductDataType {
   params: {
@@ -19,18 +20,21 @@ interface ShowProductDataType {
     price: number;
     discribtion: string;
     colors: any;
+    IDitem: any;
+    locale: any;
   }
 }
 
 export default function page(props: ShowProductDataType) {
+  console.log("props.params.id:", props.params.id);
+
   // const router = usePathname().split('/')
   // const loc = router[2] == 'man' ? db_man : db_baby
-  const x = db_woman.map((e) => {
+  const X = db_woman.map((e) => {
     // console.log("router[2] " + router[2]);
     // console.log("e.id: " + e.id);
     // console.log("props.params.id: " + props.params.id);
     if (e.id == props.params.id) {
-
       return (
         <Box
           key={e.id}
@@ -139,7 +143,13 @@ export default function page(props: ShowProductDataType) {
         </div>
         {/* descriptions show */}
         <div className=' bg-[rgb(247,247,247)] p-6 border-2  w-2/4 min-h-40 max-h-[800px] max-lg:w-auto'>
-          <DescriptionProduct />
+          {axios.get(`${baseUrl}/api/items/${props.params.IDitem}`)
+            .then((e) => {
+              return <DescriptionProduct Data={e.data} Locale={props.params.locale} />
+            },
+            )
+            .catch(() => notFound())
+          }
         </div>
       </div>
 

@@ -5,9 +5,9 @@ import { createSlice } from '@reduxjs/toolkit'
 const shopSlice = createSlice({
     name: 'shopSlice',
     initialState: {
-        c: []
-
-
+        c: [],
+        RemoveItemFromCart: false,
+        RemoveItemFromCartEnd: false,
     },
     reducers: {
         myShoping: (state, action = {
@@ -25,8 +25,14 @@ const shopSlice = createSlice({
             localStorage.setItem("shopSlice", state.purchasesData);
             console.log("state is");
             console.log(state.purchasesData);
+        },
+        RemoveItemFromCartAction: state => {
+            state.RemoveItemFromCart = !state.RemoveItemFromCart
+        },
+        RemoveItemFromCartEndAction: state => {
+            state.RemoveItemFromCart = !state.RemoveItemFromCart
         }
     }
 })
-export const { myShoping } = shopSlice.actions
+export const { myShoping, RemoveItemFromCartAction, RemoveItemFromCartEndAction } = shopSlice.actions
 export default shopSlice.reducer

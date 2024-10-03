@@ -32,6 +32,7 @@ export default function logintrans({
         lastName={t("lastName")}
         langKey={locale}
       />
+      
     </>
   );
 }

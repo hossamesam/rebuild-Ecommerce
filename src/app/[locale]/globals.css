@@ -7,6 +7,9 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 255, 255, 255;
   --background-end-rgb: 255, 255, 255;
+  --loaderSucces: linear-gradient(rgb(216, 216, 216) 0 0) 0/0% no-repeat rgb(83, 198, 57);
+  --loaderError: linear-gradient(rgb(216, 216, 216) 0 0) 0/0% no-repeat rgb(203, 50, 50);
+  --loaderWarning: linear-gradient(rgb(216, 216, 216) 0 0) 0/0% no-repeat rgb(255, 145, 0);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -37,4 +40,30 @@ body {
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
   border-bottom: 20px solid rgb(255, 251, 251);
+}
+
+#loader {
+  height: 4px;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  animation: l2 10s cubic-bezier(.56, .71, .73, .6);
+}
+
+.loaderError {
+  background: var(--loaderError);
+}
+
+.loaderSuccess {
+  background: var(--loaderSucces);
+}
+
+.loaderWarning {
+  background: var(--loaderWarning);
+}
+
+@keyframes l2 {
+  100% {
+    background-size: 110%
+  }
 }

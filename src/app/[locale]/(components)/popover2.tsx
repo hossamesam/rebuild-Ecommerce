@@ -6,7 +6,7 @@ import man_catogrey from '@/../public/image_catogrey/man_catogrey.jpg';
 import shoes_catogrey from '@/../public/image_catogrey/shoes_catogrey.jpg';
 import women_catogrey from '@/../public/image_catogrey/women_catogrey.jpg';
 import Image from 'next/image';
-import type { nav } from '../(components)/header'
+import type { nav } from './Header'
 import { usePathname } from 'next/navigation';
 import { Link } from '@/navigation';
 

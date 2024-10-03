@@ -7,6 +7,7 @@ export default function Home() {
   const t = useTranslations('Navigation');
   const c = useTranslations('catogry');
   return <>
+
     <Popover2 menu={String(t('menu'))}
       mens={String(c('Mens'))}
       women={String(c('womens'))}

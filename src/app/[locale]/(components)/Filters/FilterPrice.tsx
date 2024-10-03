@@ -2,8 +2,8 @@
 import { Box, Slider, Typography } from '@mui/material'
 import React, { useState } from 'react'
 
-function FilterSlid() {
-  const [value1, setValue1] = useState<number[]>([50, 5000])
+function FilterPrice() {
+  const [value1, setValue1] = useState<number[]>([1, 20000])
   const minDistance = 10
 
   const handleChange1 = (event: Event, newValue: number | number[], activeThumb: number) => {
@@ -29,9 +29,10 @@ function FilterSlid() {
             dir="rtl"
             value={value1}
             onChange={handleChange1}
-            max={5000}
-            min={50}
+            max={20000}
+            min={1}
             valueLabelDisplay="on"
+            lang='rtl'
             getAriaLabel={() => 'Minimum distance'}
           />
         </Box>
@@ -40,4 +41,4 @@ function FilterSlid() {
   )
 }
 
-export default FilterSlid
+export default FilterPrice

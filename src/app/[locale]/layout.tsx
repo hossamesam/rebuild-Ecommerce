@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import Header from '@/app/[locale]/(components)/header';
+import Header from '@/app/[locale]/(components)/Header';
 import Popover from './(components)/Popover';
 import { useTranslations } from 'next-intl';
 import Usebanner from './(components)/slide/usebanner';
@@ -31,7 +31,7 @@ export default function RootLayout({
   const s = useTranslations('SignUp');
   const [Mens, womens] = [String(c('Mens')), String(c('womens'))]
   return (
-    <html lang={locale} dir='rtl'>
+    <html lang={locale} dir={locale == "ar" ? "rtl" : "ltr"}>
       <body className={inter.className} >
         <Header
           signIn={t('signIn')}
