@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import Header from '@/app/[locale]/(components)/Header';
-import Popover from './(components)/Popover';
+import Header from '@/app/[locale]/components/Header';
+import Popover from './components/Popover';
 import { useTranslations } from 'next-intl';
-import Usebanner from './(components)/slide/usebanner';
+import Usebanner from './components/slide/usebanner';
 import { usePathname } from 'next/navigation';
-import ShopSlide from './(components)/ShopSlide';
-import Popover2 from './(components)/popover2';
+import ShopSlide from './components/ShopSlide';
+import Popover2 from './components/popover2';
+import { Suspense } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -34,6 +35,8 @@ export default function RootLayout({
     <html lang={locale} dir={locale == "ar" ? "rtl" : "ltr"}>
       <body className={inter.className} >
         <Header
+          createProduct={c('createProduct')}
+          createPolicy={c('createPolicy')}
           signIn={t('signIn')}
           ShoppingCar={t('ShoppingCar')}
           mens={String(c('Mens'))}
@@ -53,8 +56,10 @@ export default function RootLayout({
           shoes={String(c('shoes'))} home={''} signIn={''} ShoppingCar={''} local={''} signup={''} descriptionsignUp={''} Login={''} descriptionLogin={''} /> */}
 
         <Usebanner />
+        <Suspense fallback={<p>Loading feed...</p>}>
+          {children}
+        </Suspense>
 
-        {children}
       </body>
     </html>
   );

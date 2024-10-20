@@ -8,6 +8,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return <Provider store={store}>
-    {children}
+      {children}
   </Provider>
 }

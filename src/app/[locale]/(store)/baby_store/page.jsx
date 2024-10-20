@@ -1,5 +1,5 @@
 "use client";
-import Tshirt from "../../(components)/T-shirt";
+import Tshirt from "../../components/T-shirt";
 import baby from "@/../../public/oldproject/baby.json";
 import { Box } from "@mui/material";
 
@@ -21,7 +21,8 @@ export default function Home() {
             lg: "1fr 1fr 1fr 1fr ",
             xl: "1fr 1fr 1fr 1fr 1fr 1fr  ",
           },
-        }}>
+        }}
+      >
         {baby.map((product) => (
           <Tshirt
             src={product.imageSrc}
@@ -33,7 +34,8 @@ export default function Home() {
             color={product.color}
             price={product.price}
             description={product.description}
-            kind={router}></Tshirt>
+            kind={router}
+          ></Tshirt>
         ))}
       </Box>
     </main>

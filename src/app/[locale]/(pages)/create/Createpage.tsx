@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Box, TextField, Typography, FormControlLabel, Checkbox, InputLabel, MenuItem, FormControl, Button, OutlinedInput, Input } from '@mui/material'
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Image from 'next/image';
@@ -10,6 +10,10 @@ import shoseIcon from '@/../public/icon-drower/shoseIcon.svg';
 import axios, { Axios } from 'axios';
 import { baseUrl } from "@/baseUrl";
 import FormData from 'form-data'
+import { useSelector } from 'react-redux';
+import NotFound from '@/app/not-found';
+import { redirect } from 'next/navigation';
+import Loading from '../../components/Loading/loading';
 
 interface createtypes {
   ProductType: string,
@@ -46,7 +50,9 @@ function Coloress() {
     "#a5f3fc", "#22d3ee", "#0891b2", "#155e75",
     "#e9d5ff", "#c084fc", "#9333ea", "#6b21a8",
   ]
+  // axios.get(`${baseUrl}/api/colors`).then((colur) => {
 
+  // })
   return (
     <form action="" className='grid xl:grid-rows-4 sm:grid-rows-4 grid-rows-4 grid-flow-col gap-2 bg-white border-2 border-gray-500 border-dashed p-2'>
       {colorsHex.map((colur, index) =>
@@ -86,7 +92,7 @@ function Coloress() {
                 stroke="currentColor" strokeWidth="1">
                 <path fillRule="evenodd" stroke="#e7e5e4"
                   d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                  clip-rule="evenodd"></path>
+                  clipRule="evenodd"></path>
               </svg>
             </span>
           </label>
@@ -125,235 +131,246 @@ export default function Createpage({ dir, mens, women, baby, shoes, ProductType,
   //     }
   //   }
   // )
+  const state: any = useSelector<any>((state) => state.HeaderSlice);
+  const Access = state.Access
+  const token = state.token
 
   let x = false;
-  return (
-    <Box dir={dir} className="lg:mx-24 xl:mx-64  mt-16 "  >
-      <div dir={dir}>
 
-        <div className='bg-gray-100 border-2 border-gray-500 border-solid rounded-lg p-2 ml-10 mb-5'>
-          <h1 className='text-2xl text-black font-bold m-1'>{ProductType}</h1>
-          <hr className='border-1 box-content  border-gray-500' />
-          <ul className='flex flex-row gap-4  my-4 text-white'>
-            {drawtitle.map((e, index) => {
-              return (
-                <li key={index} className='flex flex-col w-3/4'>
-                  <input id={"end" + index} name={"hosting"} required className='peer hidden ' type="radio" onChange={() => setCategory(e.id)} />
-                  <label htmlFor={"end" + index} className='flex flex-col  py-4 h-28 rounded-2xl   bg-gray-800 hover:bg-gray-700  peer-checked:text-s peer-checked:bg-blue-800 cursor-pointer '>
-                    <div className='flex flex-col  '>
-                      <Image alt='index' className='invert  peer-checked:invert-0 flex self-center z-10' width={40} src={e.icon} />
-                      <hr className='mt-2 border-2 w-full border-neutral-200' />
-                      <div className='flex justify-center py-2 self-center '>{e.title}</div>
-                    </div>
-                  </label>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
+  if (Access == "admin") {
+    return (
+      <Box dir={dir} className="lg:mx-24 xl:mx-64  mt-16 "  >
+        <div dir={dir}>
+
+          <div className='bg-gray-100 border-2 border-gray-500 border-solid rounded-lg p-2 ml-10 mb-5'>
+            <h1 className='text-2xl text-black font-bold m-1'>{ProductType}</h1>
+            <hr className='border-1 box-content  border-gray-500' />
+            <ul className='flex flex-row gap-4  my-4 text-white'>
+              {drawtitle.map((e, index) => {
+                return (
+                  <li key={index} className='flex flex-col w-3/4'>
+                    <input id={"end" + index} name={"hosting"} required className='peer hidden ' type="radio" onChange={() => setCategory(e.id)} />
+                    <label htmlFor={"end" + index} className='flex flex-col  py-4 h-28 rounded-2xl   bg-gray-800 hover:bg-gray-700  peer-checked:text-s peer-checked:bg-blue-800 cursor-pointer '>
+                      <div className='flex flex-col  '>
+                        <Image alt='index' className='invert  peer-checked:invert-0 flex self-center z-10' width={40} src={e.icon} />
+                        <hr className='mt-2 border-2 w-full border-neutral-200' />
+                        <div className='flex justify-center py-2 self-center '>{e.title}</div>
+                      </div>
+                    </label>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
 
 
 
-        <div className='bg-gray-100 border-2 border-gray-500 border-solid rounded-lg p-2 ml-10 mb-5'>
-          <h1 className='text-2xl text-black font-bold  m-1'>{ProductDetails}</h1>
-          <hr className='border-1 box-content  border-gray-500' />
+          <div className='bg-gray-100 border-2 border-gray-500 border-solid rounded-lg p-2 ml-10 mb-5'>
+            <h1 className='text-2xl text-black font-bold  m-1'>{ProductDetails}</h1>
+            <hr className='border-1 box-content  border-gray-500' />
 
-          <div className='grid  grid-cols-2   gap-4 my-4'>
-            <Box>
-              <Typography variant="body1" color="initial"> {nameAr}</Typography>
-              <TextField
-                onChange={(e) => setNameAr(e.target.value)}
-                placeholder={nameAr}
-                variant="outlined"
-                fullWidth
-              />
-            </Box>
-            <Box>
-              <Typography variant="body1" color="initial">{nameEn}</Typography>
-              <TextField
-                onChange={(e) => setNameEn(e.target.value)}
-                placeholder={nameEn}
-                variant="outlined"
-                fullWidth
-              />
-            </Box>
-            <Box>
-              <Typography variant="body1" color="initial">{barcode}</Typography>
-              <TextField
-                onChange={(e) => setBarcode(e.target.value)}
-                placeholder={barcode}
-                variant="outlined"
-                fullWidth
-              />
-            </Box>
-            <Box className="flex flex-row w-full">
-
-              <Box className="w-full">
-                <Typography variant="body1" color="initial">{price}</Typography>
+            <div className='grid  grid-cols-2   gap-4 my-4'>
+              <Box>
+                <Typography variant="body1" color="initial"> {nameAr}</Typography>
                 <TextField
-                  type='number'
-                  onChange={(e) => { setSellPrice(Number(e.target.value)) }}
-                  placeholder={price}
-                  variant="filled"
+                  onChange={(e) => setNameAr(e.target.value)}
+                  placeholder={nameAr}
+                  variant="outlined"
                   fullWidth
                 />
               </Box>
+              <Box>
+                <Typography variant="body1" color="initial">{nameEn}</Typography>
+                <TextField
+                  onChange={(e) => setNameEn(e.target.value)}
+                  placeholder={nameEn}
+                  variant="outlined"
+                  fullWidth
+                />
+              </Box>
+              <Box>
+                <Typography variant="body1" color="initial">{barcode}</Typography>
+                <TextField
+                  onChange={(e) => setBarcode(e.target.value)}
+                  placeholder={barcode}
+                  variant="outlined"
+                  fullWidth
+                />
+              </Box>
+              <Box className="flex flex-row w-full">
+
+                <Box className="w-full">
+                  <Typography variant="body1" color="initial">{price}</Typography>
+                  <TextField
+                    type='number'
+                    onChange={(e) => { setSellPrice(Number(e.target.value)) }}
+                    placeholder={price}
+                    variant="filled"
+                    fullWidth
+                  />
+                </Box>
+
+                <Box>
+                  <h1>&nbsp;</h1>
+                  {/* <Typography variant="body1" color="initial">العملة</Typography> */}
+                  <Select
+                    variant="filled"
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    label="price"
+                    onChange={(e) => {
+                      setPrice(e.target.value)
+                    }}
+                    value={getprice}
+                  >
+                    <MenuItem value={"EGY"} >EGY</MenuItem>
+                    <MenuItem value={"USD"} >$</MenuItem>
+                    <MenuItem value={"EUR"} >€</MenuItem>
+                    <MenuItem value={"BTC"} disabled>฿</MenuItem>
+                    <MenuItem value={"JPY"} disabled>¥</MenuItem>
+                  </Select>
+                </Box>
+              </Box>
+
+              <form action="" className='flex flex-col'>
+                <label htmlFor="message" className='text-gray-800'>{descriptionAr}</label>
+                <textarea id="message" rows={4} className='text-gray-800 border-2 border-gray-500 border-dashed p-2' onChange={(e) => setDescription(e.target.value)}></textarea>
+              </form>
+
+              <form action="" className='flex flex-col'>
+                <label htmlFor="message" className='text-gray-800'>{descriptionEn}</label>
+                <textarea id="message" rows={4} className='text-gray-800 border-2 border-gray-500 border-dashed p-2' onChange={(e) => setdescriptionTranslate(e.target.value)}></textarea>
+              </form>
 
               <Box>
-                <h1>&nbsp;</h1>
-                {/* <Typography variant="body1" color="initial">العملة</Typography> */}
-                <Select
-                  variant="filled"
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  label="price"
-                  onChange={(e) => {
-                    setPrice(e.target.value)
-                  }}
-                  value={getprice}
-                >
-                  <MenuItem value={"EGY"} >EGY</MenuItem>
-                  <MenuItem value={"USD"} >$</MenuItem>
-                  <MenuItem value={"EUR"} >€</MenuItem>
-                  <MenuItem value={"BTC"} disabled>฿</MenuItem>
-                  <MenuItem value={"JPY"} disabled>¥</MenuItem>
-                </Select>
+                <Typography variant="body1" color="initial">{sizes}</Typography>
+                <FormControl fullWidth dir='ltr'>
+                  <InputLabel
+                    id="demo-simple-select-label">{sizes}</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    onChange={(e) => {
+                      setItemSize(e.target.value)
+                    }}
+                    multiple
+                    value={getsize}
+                    input={<OutlinedInput label="Name" />}
+
+                  >
+                    <MenuItem value={"SM"} >small</MenuItem>
+                    <MenuItem value={"MD"} >md</MenuItem>
+                    <MenuItem value={"L"} >l</MenuItem>
+                    <MenuItem value={"XL"} >xl</MenuItem>
+                    <MenuItem value={"XXL"} >xxl</MenuItem>
+                    <MenuItem value={"XXXL"} >xxxl</MenuItem>
+
+                  </Select>
+                </FormControl>
               </Box>
-            </Box>
 
-            <form action="" className='flex flex-col'>
-              <label htmlFor="message" className='text-gray-800'>{descriptionAr}</label>
-              <textarea id="message" rows={4} className='text-gray-800 border-2 border-gray-500 border-dashed p-2' onChange={(e) => setDescription(e.target.value)}></textarea>
-            </form>
 
-            <form action="" className='flex flex-col'>
-              <label htmlFor="message" className='text-gray-800'>{descriptionEn}</label>
-              <textarea id="message" rows={4} className='text-gray-800 border-2 border-gray-500 border-dashed p-2' onChange={(e) => setdescriptionTranslate(e.target.value)}></textarea>
-            </form>
 
-            <Box>
-              <Typography variant="body1" color="initial">{sizes}</Typography>
-              <FormControl fullWidth dir='ltr'>
-                <InputLabel
-                  id="demo-simple-select-label">{sizes}</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
+
+
+              <div >
+                <Typography variant="body1" color="initial">{cloros}</Typography>
+                <Coloress />
+              </div>
+
+            </div>
+            <div className="flex items-start justify-center text-center w-full  ">
+              <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-64 border-2 border-black border-dashed rounded-lg cursor-pointer dark:bg-gray-700 hover:bg-gray-300 bg-gray-200   dark:hover:border-gray-500 dark:hover:bg-gray-600 dark:border-gray-500 ">
+                <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                  <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                  </svg>
+                  <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span></p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                </div>
+                <input id="dropzone-file" type="file" className="hidden " multiple
+
                   onChange={(e) => {
-                    setItemSize(e.target.value)
-                  }}
-                  multiple
-                  value={getsize}
-                  input={<OutlinedInput label="Name" />}
+                    let formData = new FormData();
+                    formData.append("file", e.target.files[0]);
 
-                >
-                  <MenuItem value={"SM"} >small</MenuItem>
-                  <MenuItem value={"MD"} >md</MenuItem>
-                  <MenuItem value={"L"} >l</MenuItem>
-                  <MenuItem value={"XL"} >xl</MenuItem>
-                  <MenuItem value={"XXL"} >xxl</MenuItem>
-                  <MenuItem value={"XXXL"} >xxxl</MenuItem>
+                    axios.post(`${baseUrl}/api/attachments`, formData, {
+                      "headers": {
+                        "Authorization": `Bearer ${token}`,
+                        'Content-Type': `multipart/form-data `,
+                      }
+                    })
+                      .then((res) => console.log(res))
+                      .catch((err) => console.log(err))
 
-                </Select>
-              </FormControl>
-            </Box>
-
-
-
-
-
-            <div >
-              <Typography variant="body1" color="initial">{cloros}</Typography>
-              <Coloress />
+                    setSort([...getsort, URL.createObjectURL(e.target.files[0])])
+                    console.log(e.target.value + "\n" + "URL = " + URL.createObjectURL(e.target.files[0]));
+                  }} />
+              </label>
             </div>
 
-          </div>
-          <div className="flex items-start justify-center text-center w-full  ">
-            <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-64 border-2 border-black border-dashed rounded-lg cursor-pointer dark:bg-gray-700 hover:bg-gray-300 bg-gray-200   dark:hover:border-gray-500 dark:hover:bg-gray-600 dark:border-gray-500 ">
-              <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                </svg>
-                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span></p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-              </div>
-              <input id="dropzone-file" type="file" className="hidden " multiple
+            <div className='flex flex-row gap-2'>
+              {getsort.map((e, index) => (
+                <div key={index} className='w-52 h-52 flex items-center justify-center bg-white border-2 border-neutral-500 rounded-lg border-solid  text-red-500 mt-2'>
+                  <img className='object-fill h-full w-full rounded-md' src={e} />
+                </div>
+              ))
+              }
+            </div>
 
-                onChange={(e) => {
-                  let formData = new FormData();
-                  formData.append("file", e.target.files[0]);
 
-                  axios.post(`${baseUrl}/api/attachments`, formData, {
-                    "headers": {
-                      "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNjc3NDUzNywiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzI2Njg4MTM3fQ.lhzgf8kKUaJsRi5H_wmNk4_OvrvruNUosvWb6tA2yrgYksFedzLj5TO7pmzTMz6FTFAuAPbdOMXr-jYLddeaRA",
-                      'Content-Type': `multipart/form-data `,
+            <Button
+              type='submit'
+              variant='contained'
+              className='my-4 flex center'
+              onClick={() => {
+
+                const obj = {
+                  "barcode": getbarcode,
+                  "nameAr": getnameAr,
+                  "nameTranslate": { "en": getNameEn },
+                  "description": getdescription,
+                  "descriptionTranslate": { "en": getdescriptionTranslate },
+                  "sizes": getsize,
+                  "sellPrice": getsellPrice,
+                  // "colors": colors,
+                  "colors": [{ id: 1 }],
+                  "category": { "id": getCategory },
+                }
+                console.log(obj);
+                axios.post(`${baseUrl}/api/items`, obj,
+                  {
+                    'headers': {
+                      "Authorization": `Bearer ${token}`,
                     }
                   })
-                    .then((res) => console.log(res))
-                    .catch((err) => console.log(err))
+                  .then((request) => {
+                    console.log(request)
 
-                  setSort([...getsort, URL.createObjectURL(e.target.files[0])])
-                  console.log(e.target.value + "\n" + "URL = " + URL.createObjectURL(e.target.files[0]));
-                }} />
-            </label>
+                  })
+                  .catch((err) => console.log(err))
+                // var json = JSON.stringify(obj);
+                // var fs = require('fs');
+                // fs.writeFile('baby.json', json, 'utf8',true);
+
+              }}
+            >
+              انشاء  منتج جديد
+            </Button>
+
+
+
           </div>
-
-          <div className='flex flex-row gap-2'>
-            {getsort.map((e, index) => (
-              <div key={index} className='w-52 h-52 flex items-center justify-center bg-white border-2 border-neutral-500 rounded-lg border-solid  text-red-500 mt-2'>
-                <img className='object-fill h-full w-full rounded-md' src={e} />
-              </div>
-            ))
-            }
-          </div>
-
-
-          <Button
-            type='submit'
-            variant='contained'
-            className='my-4 flex center'
-            onClick={() => {
-
-              const obj = {
-                "barcode": getbarcode,
-                "nameAr": getnameAr,
-                "nameTranslate": { "en": getNameEn },
-                "description": getdescription,
-                "descriptionTranslate": { "en": getdescriptionTranslate },
-                "sizes": getsize,
-                "sellPrice": getsellPrice,
-                // "colors": colors,
-                "colors": [{ id: 1 }],
-                "category": { "id": getCategory },
-              }
-              console.log(obj);
-              axios.post(`${baseUrl}/api/items`, obj,
-                {
-                  'headers': {
-                    'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNjc3NDUzNywiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzI2Njg4MTM3fQ.lhzgf8kKUaJsRi5H_wmNk4_OvrvruNUosvWb6tA2yrgYksFedzLj5TO7pmzTMz6FTFAuAPbdOMXr-jYLddeaRA'
-
-                  }
-                })
-                .then((request) => {
-                  console.log(request)
-
-                })
-                .catch((err) => console.log(err))
-              // var json = JSON.stringify(obj);
-              // var fs = require('fs');
-              // fs.writeFile('baby.json', json, 'utf8',true);
-
-            }}
-          >
-            انشاء  منتج جديد
-          </Button>
-
-
-
         </div>
-      </div>
-    </Box >
-  )
+      </Box >
+    )
+  }
+  else if (Access == "pending") {
+    return <Loading />
+  }
+  else if (Access == "") {
+    return <NotFound />
+  }
 }
 
 

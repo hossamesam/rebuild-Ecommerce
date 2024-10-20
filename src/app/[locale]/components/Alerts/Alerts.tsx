@@ -16,10 +16,7 @@ export function AlertStatus({ Status, Text }: StatusType) {
                 break;
         }
     }
-
-
     return (
-
         <div
             onAnimationEnd={(e) => {
                 e.currentTarget.style.display = "none"

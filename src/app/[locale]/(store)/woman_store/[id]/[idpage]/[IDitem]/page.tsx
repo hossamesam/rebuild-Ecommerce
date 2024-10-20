@@ -1,15 +1,15 @@
 import React from 'react'
-import MagnifierImg from '@/app/[locale]/(components)/magnifier'
+import MagnifierImg from '@/app/[locale]/components/magnifier'
 import db_woman from "@/../../public/oldproject/woman.json";
 import { Box, Chip, Divider, Fab, Rating, Typography } from '@mui/material';
-import SelectCity from '@/app/[locale]/(components)/SelectCity';
+import SelectCity from '@/app/[locale]/components/SelectCity';
 import { usePathname } from 'next/navigation'
-import ImgSlider from '@/app/[locale]/(components)/imgSlider/ImgSlider.jsx';
+import ImgSlider from '@/app/[locale]/components/imgSlider/ImgSlider.jsx';
 
 import { notFound } from 'next/navigation';
-import Usebanner from '@/app/[locale]/(components)/slide/usebanner';
-import DescriptionProduct from '@/app/[locale]/(components)/DescriptionProduct/DescriptionProduct';
-import CarouselProduct from '@/app/[locale]/(components)/anotherProduct/CarouselProduct';
+import Usebanner from '@/app/[locale]/components/slide/usebanner';
+import DescriptionProduct from '@/app/[locale]/components/DescriptionProduct/DescriptionProduct';
+import CarouselProduct from '@/app/[locale]/components/anotherProduct/CarouselProduct';
 import axios from 'axios';
 import { baseUrl } from '@/baseUrl';
 

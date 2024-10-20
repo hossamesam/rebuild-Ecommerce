@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { MyShoping, MyShopingData, MyShopingDataCount } from '../../../../types/app'
 import { Minus, Plus, RemoveFormatting, RemoveFormattingIcon, Trash, Trash2 } from 'lucide-react'
 import { useImmer } from 'use-immer'
-import { AlertAttention } from '../../(components)/Alerts/Alerts'
+import { AlertAttention } from '../../components/Alerts/Alerts'
 import { useDispatch, useSelector } from 'react-redux'
 import { RemoveItemFromCartAction } from '@/Redux/shopSlice'
 

@@ -1,7 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { useTranslations } from 'next-intl';
-import { usePathname } from 'next/navigation';
 
+export const getLanguage = createAsyncThunk(
+    'counter/getLanguage',
+    async (data, thunkAPI) => {
+        const e = useTranslations('createpage');
+        const c = await useTranslations('catogry');
+
+        return  c;
+    })
 
 const translateSlice = createSlice({
     name: 'counter',
@@ -22,7 +29,25 @@ const translateSlice = createSlice({
             console.log("ssssssssssssssss:");
             console.log(state.pathname);
         },
+    },
 
+    extraReducers: (builder) => {
+        builder
+            .addCase(getLanguage.pending, (state, action) => {
+
+                return console.log(action.payload);
+                // state.value = action.payload
+            })
+        builder
+            .addCase(getLanguage.fulfilled, (state, action) => {
+                return console.log(action.payload);
+                // state.value = action.payload
+            })
+        builder
+            .addCase(getLanguage.rejected, (state, action) => {
+                return console.log(action.payload);
+                // state.value = action.payload
+            })
     }
 })
 export const { incremented, decremented, pathNow } = translateSlice.actions

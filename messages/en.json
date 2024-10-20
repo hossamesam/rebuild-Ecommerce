@@ -20,7 +20,10 @@
     "Mens": "Men's Clothing",
     "womens": "women's Clothing",
     "babys": "baby's Clothing",
-    "shoes": "shoes"
+    "shoes": "shoes",
+    "createProduct": "Create Product",
+        "createPolicy": "create Policy"
+
   },
   "Footer": {
     "copyright": "© 2024 Your App. All rights reserved."

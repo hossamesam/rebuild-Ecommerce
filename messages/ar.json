@@ -20,7 +20,9 @@
     "Mens": "ملابس رجال",
     "womens": "ملابس سيدات",
     "babys": "ملابس اطفال",
-    "shoes": "احذية"
+    "shoes": "احذية",
+    "createProduct": "اضافة منتج",
+    "createPolicy": "اضافة سياسة"
   },
   "Footer": {
     "copyright": "© 2024 Aplikasi Anda. Hak cipta dilindungi."

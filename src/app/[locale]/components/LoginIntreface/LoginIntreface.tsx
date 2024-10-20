@@ -1,5 +1,5 @@
 "use client"
-import { signNow } from '@/Redux/HeaderSlice';
+import { jwtDecote, signNow } from '@/Redux/HeaderSlice';
 import { baseUrl } from '@/baseUrl';
 import { redirect } from '@/navigation';
 import { FormData, signupSchema } from '@/types/app';
@@ -9,7 +9,7 @@ import { X } from 'lucide-react';
 import { useCookies } from 'next-client-cookies';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReCAPTCHA from "react-google-recaptcha";
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,7 +23,6 @@ function LoginIntreface() {
   const [Recap, setRecap] = useState<String>()
   const cookies = new Cookies();
   const router = useRouter();
-
   const {
     handleSubmit,
     register,
@@ -43,14 +42,18 @@ function LoginIntreface() {
     axios.post(`${baseUrl}/api/authenticate`, users, {
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
-        "re-captcha-token": Recap,
+        "re-captcha-token": String(Recap),
       },
     })
-      .then((e) => {
-        console.log(e.data)
-        cookies.set('token', JSON.stringify(e.data))
-        router.push("/")
+      .then(async (e) => {
+        // await console.log(e.data)
+        await cookies.set('token', JSON.stringify(e.data))
+        await dispatch(signNow());
+        await router.push("/")
+        await dispatch(jwtDecote(JSON.stringify(e.data)));
 
+        // await location.reload();
+        // FirjwtDecotee()
         // sessionStorage.setItem("token", JSON.stringify(e.data))
       })
       .catch(err => console.log(err))
@@ -74,7 +77,7 @@ function LoginIntreface() {
               dir="ltr"
               className="absolute inset-0  flex dark:bg-gray-900 items-center justify-center"
             >
-              <div className="relative z-50 w-full bg-red-600 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+              <div className="fixed z-50 w-full  bg-slate-50 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                 <button
                   onClick={() => {
                     dispatch(signNow());
@@ -107,6 +110,7 @@ function LoginIntreface() {
                         className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="username"
                         minLength={4}
+                        max={15}
                       />
                       {errors.username && (
                         <p className="mt-2 text-sm text-red-600 dark:text-red-500">
@@ -129,6 +133,8 @@ function LoginIntreface() {
                         type="password"
                         placeholder="•••••••••••"
                         className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        minLength={4}
+                        max={15}
                       />
                       {errors.password && (
                         <p className="mt-2 text-sm text-red-600 dark:text-red-500">
@@ -138,7 +144,6 @@ function LoginIntreface() {
                         </p>
                       )}
                     </div>
-
                     <div className="flex items-center justify-between">
                       <div className="flex items-start">
                         <div className="flex items-center h-5">
@@ -171,7 +176,10 @@ function LoginIntreface() {
                       }}
                     />
                     <button
-                      onClick={() => handleSubmit(onSubmit)}
+                      onClick={() => {
+                        handleSubmit(onSubmit)
+
+                      }}
                       disabled={isSubmitting}
                       type="submit"
                       className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
@@ -181,7 +189,7 @@ function LoginIntreface() {
                     <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                       Don’t have an account yet?{" "}
                       <Link
-                        href="/register"
+                        href={"/" + cookies.get("NEXT_LOCALE") + "/register"}
                         onClick={() => {
                           dispatch(signNow());
                         }}
@@ -202,3 +210,12 @@ function LoginIntreface() {
 }
 
 export default LoginIntreface
+
+
+// function FirjwtDecotee() {
+//   const dispatch = useDispatch()
+//   useEffect(() => {
+//     dispatch(jwtDecote());
+//   }, [dispatch])
+//   location.reload();
+// }

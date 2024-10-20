@@ -27,6 +27,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/[locale]/(store)/woman_store/[id]/[idpage]/page.jsx"
-  ],
+, "src/app/[locale]/(pages)/PageTest/page.js"  ],
   "exclude": ["node_modules"]
 }

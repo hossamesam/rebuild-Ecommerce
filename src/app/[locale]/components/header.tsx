@@ -14,12 +14,16 @@ import LogoComponent from './LogoComponent/Logo';
 import SearchComponent from './SearchComponent/SearchComponent';
 import LanguageComponent from './LanguageComponent/LanguageComponent';
 import CartComponent from './CartComponent/CartComponent';
+import { useSelector } from 'react-redux';
+import Logout from './Logout/Logout.tsx';
 
 
 export default function Header(props: nav) {
   const [state_menu, setstate_menu] = useState("hidden");
   const [close_menu_shop, setclose_menu_shop] = useState("hidden");
-  const cookies = new Cookies();
+
+  const state: any = useSelector<any>((state) => state.HeaderSlice);
+  const Access = state.Access
 
   const close_menu = () => {
     state_menu === "hidden" ? setstate_menu("flex ") : setstate_menu("hidden");
@@ -37,10 +41,12 @@ export default function Header(props: nav) {
   useEffect(() => {
     router.push(`/${props.local}/${path}`);
   }, [])
-
+  console.log('====================================');
+  console.log("Accesshere:", Access);
+  console.log('====================================');
   return (
     <>
-      <header className="overflow-x-clip h-24 max-sm:h-16 bg-slate-700 flex flex-row items-center justify-between dark:bg-red-500 ">
+      <header className="overflow-x-clip px-2 h-24 max-sm:h-16 bg-slate-700 flex flex-row items-center justify-between dark:bg-red-500 ">
 
 
         <LogoComponent />
@@ -52,19 +58,28 @@ export default function Header(props: nav) {
         >
           <LanguageComponent local={props.local} path={path} />
 
-          {!cookies.get('token') && <Loginui
-            signIn={props.signIn}
-            signup={props.signup}
-            descriptionsignUp={props.descriptionsignUp}
-            Login={props.Login}
-            descriptionLogin={props.descriptionLogin}
-            locale={props.local}
-          />
+          {Access === "" &&
+            <Loginui
+              signIn={props.signIn}
+              signup={props.signup}
+              descriptionsignUp={props.descriptionsignUp}
+              Login={props.Login}
+              descriptionLogin={props.descriptionLogin}
+              locale={props.local}
+            />
           }
 
-          <CartComponent local={props.local} ShoppingCar={props.ShoppingCar} />
+          {(Access === "" || Access === "user") && Access !== "admin" &&
+            <CartComponent local={props.local} ShoppingCar={props.ShoppingCar} />
+          }
 
-
+          {(Access === "admin" || Access === "user") &&
+            <Logout color="white"
+              size={20}
+              className="flex  items-center justify-center flex-row gap-2 max-sm:h-10 max-sm:w-10 max-sm:bg-slate-500 max-sm:rounded-full max-sm:hover:bg-slate-600 hover:scale-105 hover:border-[1px] rounded p-1"
+              classNameOftext="text-xl max-sm:hidden sm:whitespace-nowrap sm:text-[20px]  font-bold text-white font-['Roboto'] "
+            />
+          }
 
 
           <div id="menu" className="flex  ">
@@ -91,6 +106,9 @@ export default function Header(props: nav) {
             className=" h-full w-5/6"
           />
           <Menu
+            createPolicy={props.createPolicy}
+            createProduct={props.createProduct}
+            local={props.local}
             signIn={props.signIn}
             ShoppingCar={props.ShoppingCar}
             mens={props.mens}

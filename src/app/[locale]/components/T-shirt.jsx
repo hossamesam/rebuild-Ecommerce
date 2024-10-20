@@ -46,8 +46,10 @@ function Tshirt({ kind, src, alt, id, href, name, color, price, description }) {
         key={id}
         sx={{
           borderRadius: "10px",
-          maxHeight: "900px",
-          maxWidth: "300px",
+          // maxHeight: "900px",
+          height: "100%",
+          width: "100%",
+          // maxWidth: "300px",
           ml: "2vw",
           mt: "30px",
         }}
@@ -129,7 +131,9 @@ function Tshirt({ kind, src, alt, id, href, name, color, price, description }) {
             sx={{ position: "absolute", left: "40px" }}
           >
             <ShoppingCart />
-            {alert && <AlertStatus Status={"Success"} Text="تم اضافة المنتج بنجاح" />}
+            {alert && (
+              <AlertStatus Status={"Success"} Text="تم اضافة المنتج بنجاح" />
+            )}
           </IconButton>
         </CardActions>
       </Card>

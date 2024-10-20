@@ -8,7 +8,7 @@ import axios from 'axios';
 import { baseUrl } from '@/baseUrl';
 import { useDispatch } from 'react-redux';
 import { signNow } from '@/Redux/HeaderSlice';
-import GoogleOAuth from '../../(components)/GoogleOAuth/GoogleOAuth';
+import GoogleOAuth from '../../components/GoogleOAuth/GoogleOAuth';
 import { RegisterIcon } from '../../../../../public/svg';
 
 type trans = {

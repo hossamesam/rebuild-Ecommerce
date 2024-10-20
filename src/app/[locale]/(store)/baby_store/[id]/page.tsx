@@ -1,9 +1,9 @@
 import React from 'react'
-import MagnifierImg from '../../../(components)/magnifier'
+import MagnifierImg from '../../../components/magnifier'
 import db_baby from "@/../../public/oldproject/baby.json";
 import db_man from "@/../../public/oldproject/man.json";
 import { Box, Chip, Divider, Fab, Rating, Typography } from '@mui/material';
-import SelectCity from '../../../(components)/SelectCity';
+import SelectCity from '../../../components/SelectCity';
 import { usePathname } from 'next/navigation'
 
 interface ShowProductDataType {

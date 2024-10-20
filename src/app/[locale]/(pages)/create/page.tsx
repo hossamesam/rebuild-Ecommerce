@@ -1,6 +1,5 @@
 import React from 'react'
 import Createpage from "./Createpage";
-import Createpagecopy from "./Createpagecopy";
 import { useTranslations } from 'next-intl';
 
 export default function page() {
@@ -9,7 +8,7 @@ export default function page() {
 
   return (
     < >
-      <Createpagecopy
+      <Createpage
         mens={c('Mens')}
         women={c('womens')}
         baby={c('babys')}

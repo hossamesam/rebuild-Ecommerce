@@ -5,7 +5,7 @@ function SearchComponent() {
     return (
         <search
             id="search"
-            className="flex max-sm:hidden  justify-center items-center pt-2  grow  relative mx-auto text-gray-600"
+            className="flex max-sm:hidden  justify-center items-center pt-2 mx-1  grow  relative  text-gray-600"
         >
             <div className="w-5/6 relative">
                 <input

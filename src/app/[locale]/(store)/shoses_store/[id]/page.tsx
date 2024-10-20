@@ -1,8 +1,8 @@
 import React from 'react'
-import MagnifierImg from '../../../(components)/magnifier'
+import MagnifierImg from '../../../components/magnifier'
 import db_shoses from "@/../../public/oldproject/shoses.json";
 import { Box, Chip, Divider, Fab, Rating, Typography } from '@mui/material';
-import SelectCity from '../../../(components)/SelectCity';
+import SelectCity from '../../../components/SelectCity';
 import { usePathname } from 'next/navigation'
 
 

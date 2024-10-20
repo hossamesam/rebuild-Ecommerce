@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import Tshirt from "../../(components)/T-shirt";
+import Tshirt from "../../components/T-shirt";
 import shoses from "@/../../public/oldproject/shoses.json";
 import { Box } from "@mui/material";
 
@@ -23,7 +23,8 @@ export default function Home() {
             lg: "1fr 1fr 1fr 1fr ",
             xl: "1fr 1fr 1fr 1fr 1fr",
           },
-        }}>
+        }}
+      >
         {shoses.map((product) => (
           <Tshirt
             src={product.imageSrc}
@@ -35,7 +36,8 @@ export default function Home() {
             color={product.color}
             price={product.price}
             description={product.description}
-            kind={router}></Tshirt>
+            kind={router}
+          ></Tshirt>
         ))}
       </Box>
     </main>
